@@ -11,7 +11,7 @@ https://github.com/Deepintheeast/Ulanzi-Solaranzeige-Connector/assets/136626582/
 Im Video seht Ihr der Reihe nach folgende Infos:
 
 1. Uhrzeit und Anzeige des Wochentages durch den entsprechenden Balken unter der Schrift! 
-  (das ist ein Bestandteil der Firmware des Awrix-Light)
+  (das ist ein Bestandteil der Firmware des Awtrix-Light)
 
 2. SOC der Batterie (56%), das Logo "füllt" sich in Abhängigkeit des Ladezustandes von "leer" nach "voll" in aktuell 5 Stufen.
 
