@@ -15,7 +15,7 @@ Im Video seht Ihr der Reihe nach folgende Infos:
 
 2. SOC der Batterie (56%), das Logo "füllt/leert" sich in Abhängigkeit des Ladezustandes von "leer" <-> "voll" in aktuell 5 Stufen.
 
-3. Tagesertrag in kWh, hier 5,51 kWh (es fehlt heute echt etwas Sonne!)
+3. Tagesertrag in kWh, hier 5,51 kWh (es fehlt heute echt etwas die Sonne! 🌤️ )
 
 4. aktuelle PV-Leistung (2675 W) mit animiertem Logo und Schrift im "Rainbow Effekt"!
 
