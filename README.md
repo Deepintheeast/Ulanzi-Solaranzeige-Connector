@@ -21,7 +21,7 @@ Im Video seht Ihr der Reihe nach folgende Infos:
 
 5. Temperaturanzeige, dieser Wert kommt nicht von der "Solaranzeige" sondern vom "IOBroker" und wird nicht in meinem Script erzeugt!
 
-zusätzlich besteht die Möglichkeit 3. Indikatoren anzusteuern. Diese sind an der rechten Seite des Display's! Hier im Video "oben" die 3 grünen blinkenden Pixel die hier anzeigen das aktuell die Batterie geladen wird. Die "unteren" 3 Pixel zeigen durch ihre Farbe in welchem Modus sich der WR befindet "grün = Batteriemode", "blau = Netzmode" und "rot blinkend = Errormode".
+zusätzlich besteht die Möglichkeit 3. Indikatoren anzusteuern. Diese sind an der rechten Seite des Display's! Hier im Video "oben" die 3 grünen blinkenden Pixel die hier anzeigen das aktuell die Batterie geladen wird. Die "unteren" 3 Pixel zeigen durch ihre Farbe in welchem Modus sich der WR befindet "grün = Batteriemode", "blau = Netzmode" und "rot blinkend = Errormode". Der 3. Indikator besteht aus zwei Pixeln zwischen Indikator 1 und 2, wird aktuell noch nicht genutzt!
 
 Zusätzlich, wie am Ende des Video's zu sehen wird im Fehlerfall eine entsprechende Notifikation an die Ulanzi geschickt die erst durch Be(s)tätigung  der mittleren Taste gelöscht wird! 
 
