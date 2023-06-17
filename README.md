@@ -25,4 +25,4 @@ zusätzlich besteht die Möglichkeit 3. Indikatoren anzusteuern. Diese sind an d
 
 Zusätzlich, wie am Ende des Video's zu sehen, wird im Fehlerfall eine entsprechende Notifikation an die Ulanzi geschickt die erst durch Be(s)tätigung  der mittleren Taste gelöscht wird! 
 
-Weitere Beschreibung folgt ......
+Weitere geht es im [Wiki.](https://github.com/Deepintheeast/Ulanzi-Solaranzeige-Connector/wiki)
