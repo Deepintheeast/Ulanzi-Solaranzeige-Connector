@@ -23,11 +23,16 @@ ULANZI_URL = "http://192.168.x.x" # Ulanzi URL
 LOG_DATEI = "/home/pi/scripts/ulanzi.log"
 LOG_LEVEL = "INFO"  # NOTSET =0, DEBUG =10, INFO =20, WARN =30, ERROR =40, and CRITICAL =50
 
+REGLER1_TOPIC = "solaranzeige/ulanzi/xxxx" # Topic Regler 1
+REGLER2_TOPIC = "solaranzeige/ulanzi/xxxx" # Topic Regler 2
+
+VERSION_NR = "0.20"
 
 # Logging definieren
 logging.basicConfig(filename=LOG_DATEI, level=logging.getLevelName(LOG_LEVEL),
                     format='%(asctime)s - %(message)s',
                     datefmt='%d-%b-%y %H:%M:%S')
+
 
 # Funktionen definieren
 # Funktion MQTT Client erstellen und verbinden
@@ -38,11 +43,12 @@ def create_configured_client():
     client.connect(host=MQTT_HOST, port=MQTT_PORT)
     return client
 
+
 # Funktion empfangene Topic's auswerten und weiterverarbeiten
 
 def handle_message(client, userdata, msg):
     logging.info(msg.topic)
-    if msg.topic == "solaranzeige/ulanzi/pylontech/soc":
+    if msg.topic == REGLER2_TOPIC+"/soc":
         # print("SOC: "+str(msg.payload.decode("utf-8")))
         soc = (msg.payload.decode("utf-8"))
         logging.info(soc)
@@ -110,7 +116,7 @@ def handle_message(client, userdata, msg):
             logging.info(f'{url},{data}')
 
 
-    elif msg.topic == "solaranzeige/ulanzi/phocos/pv_leistung":
+    elif msg.topic == REGLER1_TOPIC+"/pv_leistung":
         pv_aktuell = round(float(msg.payload.decode("utf-8")))
         logging.info(pv_aktuell)
 
@@ -125,7 +131,7 @@ def handle_message(client, userdata, msg):
         response = requests.post(url, json=data)
         logging.info(f'{url},{data}')
 
-    elif msg.topic == "solaranzeige/ulanzi/phocos/wattstundengesamtheute":
+    elif msg.topic == REGLER1_TOPIC+"/wattstundengesamtheute":
         pv_gesamt = round((float(msg.payload.decode("utf-8")) / 1000), 2)
         logging.info(pv_gesamt)
 
@@ -140,7 +146,7 @@ def handle_message(client, userdata, msg):
         response = requests.post(url, json=data)
         logging.info(f'{url},{data}')
 
-    elif msg.topic == "solaranzeige/ulanzi/phocos/batterie_strom":
+    elif msg.topic == REGLER1_TOPIC+"/batterie_strom":
         bat_strom = round(float(msg.payload.decode("utf-8")))
         logging.info(f'{bat_strom}')
 
@@ -163,7 +169,7 @@ def handle_message(client, userdata, msg):
             response = requests.post(url, json=data)
             logging.info(f'{url},{data}')
 
-    elif msg.topic == "solaranzeige/ulanzi/phocos/modus":
+    elif msg.topic == REGLER1_TOPIC+"/modus":
         modus = (msg.payload.decode("utf-8"))
         logging.info(f'{modus}')
 
@@ -202,36 +208,3 @@ def handle_message(client, userdata, msg):
 
     else:
         logging.info('Parameter nicht bekannt !', msg.topic)
-
-# Funktion Topic publish (senden)
-
-def send_message(client, topic, payload):
-    client.publish(topic, payload)
-
-# Funktion Topic subscription (empfangen)
-
-def setup_subscriptions(client, topic):
-    client.on_message = handle_message
-    client.subscribe(topic)
-
-# Funktion Intro
-def intro():
-    url = ULANZI_URL + '/api/notify'
-    data = {
-        "text": "Ulanzi->Solaranzeige Connector Version "+str(VERSION_NR),
-        "rainbow": bool(1),
-        "repeat": 3
-    }
-    response = requests.post(url, json=data)
-    logging.info(f'{url},{data}')
-
-# Programm starten
-# MQTT Verbindung herstellen und Topic subscriben
-
-mqtt_client = create_configured_client()
-setup_subscriptions(mqtt_client, MQTT_TOPIC)
-
-# Loop starten
-intro()
-while True:
-    mqtt_client.loop()
