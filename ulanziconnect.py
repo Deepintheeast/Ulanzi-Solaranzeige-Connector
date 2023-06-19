@@ -208,3 +208,39 @@ def handle_message(client, userdata, msg):
 
     else:
         logging.info('Parameter nicht bekannt !', msg.topic)
+
+
+# Funktion Topic publish (senden)
+
+def send_message(client, topic, payload):
+    client.publish(topic, payload)
+
+
+# Funktion Topic subscription (empfangen)
+
+def setup_subscriptions(client, topic):
+    client.on_message = handle_message
+    client.subscribe(topic)
+
+# Funktion Intro
+def intro():
+    url = ULANZI_URL + '/api/notify'
+    data = {
+        "text": "Ulanzi->Solaranzeige Connector Version "+str(VERSION_NR),
+        "rainbow": bool(1),
+        "repeat": 2
+    }
+    response = requests.post(url, json=data)
+    logging.info(f'{url},{data}')
+
+# Programm starten
+# MQTT Verbindung herstellen und Topic subscriben
+
+mqtt_client = create_configured_client()
+setup_subscriptions(mqtt_client, MQTT_TOPIC)
+intro()
+
+# Loop starten
+
+while True:
+    mqtt_client.loop()
