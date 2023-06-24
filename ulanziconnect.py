@@ -59,6 +59,12 @@ def db_abfrage(DATENBANK,MEASUREMENT,DATENPUNKT):
         return DATENBANK,MEASUREMENT,DATENPUNKT,wert.text
 # Ende Funktion db_abfrage
 #
+# Funktion Ulanzi senden
+def ulanzi_senden(url,data):
+    response = requests.post(url, json=data)
+    logging.info(f'{url},{data}')
+# Ende Funktion ulanzi_senden
+#
 # Funktion intro
 def intro():
     url = ULANZI_URL + '/api/notify'
@@ -67,8 +73,7 @@ def intro():
         "rainbow": bool(1),
         "repeat": 1
     }
-    response = requests.post(url, json=data)
-    logging.info(f'{url},{data}')
+    ulanzi_senden(url,data)
 # Ende Funktion intro
 #
 # Start Funktion Ulanzi An/Aus schalten
@@ -77,8 +82,7 @@ def ulanzi_an_aus(x):
     data = {
         "power": bool(x),
     }
-    response = requests.post(url, json=data)
-    logging.info(f'{url},{data}')
+    ulanzi_senden(url,data)
 # Ende Funktion Ulanzi An/Aus
 #
 # Start Funtion Loop
@@ -99,9 +103,7 @@ def loop():
             "rainbow": bool(1),
             "duration": 3
         }
-        response = requests.post(url, json=data)
-        logging.info(f'{url},{data}')
-
+        ulanzi_senden(url,data)
     ################################## Ende Block Auswertung ##################################
 
     ################################# Beginn Block Auswertung #################################
@@ -117,8 +119,7 @@ def loop():
             "color": [252, 186, 3],
             "duration": 3
         }
-        response = requests.post(url, json=data)
-        logging.info(f'{url},{data}')
+        ulanzi_senden(url,data)
 
     ################################## Ende Block Auswertung ##################################
 
