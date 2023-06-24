@@ -1,246 +1,167 @@
 #!/usr/bin/env python3
 #
-# Das Script "abonniert" Topics eines MQTT Brokers, wertet (formatiert) die Daten aus
-# um sie entsprechend aufbereitet an eine Ulanzi Pixelclock zur Darstellung weiterzuschicken!
-#
+# Ulanzi->Solaranzeige Connector V0.20
 
 # benötigte Bibliotheken importieren
-
-import paho.mqtt.client as mqtt
-import requests
-import json
 import logging
+import requests
+import bs4 as bs
+import time
 
-# div. Einstellungen festlegen
+# diverse Einstellungen
+VERSION_NR = "0.20"
 
-MQTT_HOST = "192.168.x.x"  # IP-Adresse oder Hostname des Brokers
-MQTT_PORT = 1883  # Port des Brokers
-MQTT_USER = "admin"  # Benutzername (falls nötig)
-MQTT_PASSWORD = "solaranzeige"  # Passwort (falls nötig)
-MQTT_TOPIC = "solaranzeige/ulanzi/#"  # Topic unter dem die Daten liegen
-MQTT_CLIENTNAME = "Ulanzi-Anzeige"  # Client name
-ULANZI_URL = "http://192.168.x.x" # Ulanzi URL
-LOG_DATEI = "/home/pi/scripts/ulanzi.log"
+SOLARANZEIGE_URL = "http://192.x.x.x" # URL der Solaranzeige
+ULANZI_URL = "http://192.x.x.x" # URL der Ulanzi Pixelclock
+
+WERTE = ("solaranzeige,PV,Leistung","solaranzeige,Summen,Wh_GesamtHeute",)
+
+START_ZEIT = "06:00" # Start der Darstellung der Werte auf Ulanzi-Clock
+STOP_ZEIT = "22:30" # Ende der Darstellung der Werte auf Ulanzi-Clock
+
+LOG_DATEI = "/home/pi/scripts/ulanzi.log" # Pfad und Name der Logdatei
 LOG_LEVEL = "INFO"  # NOTSET =0, DEBUG =10, INFO =20, WARN =30, ERROR =40, and CRITICAL =50
 
-REGLER1_TOPIC = "solaranzeige/ulanzi/xxxx" # Topic Regler 1
-REGLER2_TOPIC = "solaranzeige/ulanzi/xxxx" # Topic Regler 2
-
-VERSION_NR = "0.20"
+# ab hier bitte nichts mehr ändern!
 
 # Logging definieren
 logging.basicConfig(filename=LOG_DATEI, level=logging.getLevelName(LOG_LEVEL),
                     format='%(asctime)s - %(message)s',
                     datefmt='%d-%b-%y %H:%M:%S')
 
-
-# Funktionen definieren
-# Funktion MQTT Client erstellen und verbinden
-
-def create_configured_client():
-    client = mqtt.Client(MQTT_CLIENTNAME)
-    client.username_pw_set(username=MQTT_USER, password=MQTT_PASSWORD)
-    client.connect(host=MQTT_HOST, port=MQTT_PORT)
-    return client
-
-
-# Funktion empfangene Topic's auswerten und weiterverarbeiten
-
-def handle_message(client, userdata, msg):
-    logging.info(msg.topic)
-    if msg.topic == REGLER2_TOPIC+"/soc":
-        # print("SOC: "+str(msg.payload.decode("utf-8")))
-        soc = (msg.payload.decode("utf-8"))
-        logging.info(soc)
-
-        url = ULANZI_URL + '/api/custom?name=soc'
-
-        if int(soc) >= 1 and int(soc) <= 10:
-            data = {
-                "text": str(soc) + " %",
-                "icon": 12832,
-                "color": [154, 250, 10],
-                "duration": 5
-            }
-            response = requests.post(url, json=data)
-            logging.info(f'{url},{data}')
-
-        elif int(soc) >= 11 and int(soc) <= 30:
-            data = {
-                "text": str(soc) + " %",
-                "icon": 6359,
-                "color": [154, 250, 10],
-                "duration": 5
-            }
-            response = requests.post(url, json=data)
-            logging.info(f'{url},{data}')
-
-        elif int(soc) >= 31 and int(soc) <= 50:
-            data = {
-                "text": str(soc) + " %",
-                "icon": 6360,
-                "color": [154, 250, 10],
-                "duration": 5
-            }
-            response = requests.post(url, json=data)
-            logging.info(f'{url},{data}')
-
-        elif int(soc) >= 51 and int(soc) <= 70:
-            data = {
-                "text": str(soc) + " %",
-                "icon": 6361,
-                "color": [154, 250, 10],
-                "duration": 5
-            }
-            response = requests.post(url, json=data)
-            logging.info(f'{url},{data}')
-
-        elif int(soc) >= 71 and int(soc) <= 90:
-            data = {
-                "text": str(soc) + " %",
-                "icon": 6362,
-                "color": [154, 250, 10],
-                "duration": 5
-            }
-            response = requests.post(url, json=data)
-            logging.info(f'{url},{data}')
-
-        elif int(soc) >= 91 and int(soc) <= 100:
-            data = {
-                "text": str(soc) + " %",
-                "icon": 6363,
-                "color": [154, 250, 10],
-                "duration": 5
-            }
-            response = requests.post(url, json=data)
-            logging.info(f'{url},{data}')
-
-
-    elif msg.topic == REGLER1_TOPIC+"/pv_leistung":
-        pv_aktuell = round(float(msg.payload.decode("utf-8")))
-        logging.info(pv_aktuell)
-
-        url = ULANZI_URL + '/api/custom?name=pvleistung'
-
-        data = {
-            "text": (str(pv_aktuell) + " W"),
-            "icon": 27283,
-            "rainbow": bool(1),
-            "duration": 5
-        }
-        response = requests.post(url, json=data)
-        logging.info(f'{url},{data}')
-
-    elif msg.topic == REGLER1_TOPIC+"/wattstundengesamtheute":
-        pv_gesamt = round((float(msg.payload.decode("utf-8")) / 1000), 2)
-        logging.info(pv_gesamt)
-
-        url = ULANZI_URL + '/api/custom?name=pvtaggesamt'
-
-        data = {
-            "text": (str(pv_gesamt) + " kWh"),
-            "icon": 51301,
-            "color": [252, 186, 3],
-            "duration": 5
-        }
-        response = requests.post(url, json=data)
-        logging.info(f'{url},{data}')
-
-    elif msg.topic == REGLER1_TOPIC+"/batterie_strom":
-        bat_strom = round(float(msg.payload.decode("utf-8")))
-        logging.info(f'{bat_strom}')
-
-        url = ULANZI_URL + '/api/indicator1'
-
-        if bat_strom == 0:
-            data = {
-                "color": [0, 0, 0]
-            }
-
-            response = requests.post(url, json=data)
-            logging.info(f'{url},{data}')
-
-        else:
-            data = {
-                "color": [0, 255, 0],
-                "blink": 1200
-            }
-
-            response = requests.post(url, json=data)
-            logging.info(f'{url},{data}')
-
-    elif msg.topic == REGLER1_TOPIC+"/modus":
-        modus = (msg.payload.decode("utf-8"))
-        logging.info(f'{modus}')
-
-        url = ULANZI_URL + '/api/indicator3'
-
-        if modus == "B":  # Batteriemodus
-            data = {
-                "color": [0, 255, 0]
-            }
-            response = requests.post(url, json=data)
-            logging.info(f'{url},{data}')
-
-        elif modus == "L":  # Line(Netz)modus
-            data = {
-                "color": [0, 0, 255]
-            }
-            response = requests.post(url, json=data)
-            logging.info(f'{url},{data}')
-
-        elif modus == "E":  # Error(Fehler)modus
-            data = {
-                "color": [255, 0, 0],
-                "blink": 100
-            }
-            response = requests.post(url, json=data)
-            logging.info(f'{url},{data}')
-
-            url = ULANZI_URL + '/api/notify'
-            data = {
-                "text": "Achtung! Wechselrichter befindet sich im Fehlermodus! Bitte überprüfen! ",
-                "color": [255, 0, 0],
-                "hold": bool(1)
-            }
-            response = requests.post(url, json=data)
-            logging.info(f'{url},{data}')
-
-    else:
-        logging.info('Parameter nicht bekannt !', msg.topic)
-
-
-# Funktion Topic publish (senden)
-
-def send_message(client, topic, payload):
-    client.publish(topic, payload)
-
-
-# Funktion Topic subscription (empfangen)
-
-def setup_subscriptions(client, topic):
-    client.on_message = handle_message
-    client.subscribe(topic)
-
-# Funktion Intro
+## Funktionen definieren ##
+# Funktion URL auf Verfügbarkeit testen
+def url_verfuegbar(url):
+    try:
+        r = requests.get(url)
+        return r.status_code == 200
+    except requests.exceptions.ConnectionError:
+        return False
+# Ende Funktion url_verfuegbar
+#
+# Funktion zur Abfrage der Daten aus der DB über API
+def db_abfrage(DATENBANK,MEASUREMENT,DATENPUNKT):
+      XML = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" \
+            "<solaranzeige><version>1.0</version>" \
+            "<in_out>out</in_out>" \
+            "<database name=\""+DATENBANK+"\">" \
+            "<measurement name=\""+MEASUREMENT+"\">" \
+            "<fieldname name=\""+DATENPUNKT+"\">" \
+            "</fieldname>" \
+            "</measurement>" \
+            "</database></solaranzeige>"
+      logging.debug(XML)
+      headers = {'Content-Type': 'application/xml'} # set what your server accepts
+      data = (requests.post(SOLARANZEIGE_URL+"/api/control.php", data=XML, headers=headers).text)
+      logging.debug(data)
+      soup = bs.BeautifulSoup(data,"xml")
+      for wert in soup.find_all('fieldname'):
+        return DATENBANK,MEASUREMENT,DATENPUNKT,wert.text
+# Ende Funktion db_abfrage
+#
+# Funktion intro
 def intro():
     url = ULANZI_URL + '/api/notify'
     data = {
         "text": "Ulanzi->Solaranzeige Connector Version "+str(VERSION_NR),
         "rainbow": bool(1),
-        "repeat": 2
+        "repeat": 1
     }
     response = requests.post(url, json=data)
     logging.info(f'{url},{data}')
+# Ende Funktion intro
+#
+# Start Funktion Ulanzi An/Aus schalten
+def ulanzi_an_aus(x):
+    url = ULANZI_URL + '/api/power'
+    data = {
+        "power": bool(x),
+    }
+    response = requests.post(url, json=data)
+    logging.info(f'{url},{data}')
+# Ende Funktion Ulanzi An/Aus
+#
+# Start Funtion Loop
+def loop():
 
-# Programm starten
-# MQTT Verbindung herstellen und Topic subscriben
+    WERT = db_abfrage(DATENBANK,MEASUREMENT,DATENPUNKT)
 
-mqtt_client = create_configured_client()
-setup_subscriptions(mqtt_client, MQTT_TOPIC)
+    ################################# Beginn Block Auswertung #################################
+
+    if ((WERT[0])+","+(WERT[1])+","+(WERT[2])) == "solaranzeige,PV,Leistung":
+        print(WERT[3])
+
+        url = ULANZI_URL + "/api/custom?name="+(WERT[1])+"_"+(WERT[2])
+
+        data = {
+            "text": str(int(float(WERT[3]))) + " W",
+            "icon": 27283,
+            "rainbow": bool(1),
+            "duration": 3
+        }
+        response = requests.post(url, json=data)
+        logging.info(f'{url},{data}')
+
+    ################################## Ende Block Auswertung ##################################
+
+    ################################# Beginn Block Auswertung #################################
+
+    elif (WERT[0])+","+(WERT[1])+","+(WERT[2]) == "solaranzeige,Summen,Wh_GesamtHeute":
+        print(WERT[3])
+
+        url = ULANZI_URL + "/api/custom?"+(WERT[1])+"_"+(WERT[2])
+
+        data = {
+            "text": str(round((float((WERT[3])) / 1000), 2))+" kWh",
+            "icon": 51301,
+            "color": [252, 186, 3],
+            "duration": 3
+        }
+        response = requests.post(url, json=data)
+        logging.info(f'{url},{data}')
+
+    ################################## Ende Block Auswertung ##################################
+
+    else:
+        print("Nope, keine Auswertung verfügbar für "+str(WERT[0])+","+str(WERT[1])+","+(WERT[2]))
+# Ende Funktion Loop
+
+## Programm starten ##
+print(str(url_verfuegbar(SOLARANZEIGE_URL))+" -> Solaranzeige verfügbar")
+if not (url_verfuegbar(SOLARANZEIGE_URL)):
+    exit("Solaranzeige unter der eingegeben URL nicht erreichbar!")
+
+print(str(url_verfuegbar(ULANZI_URL))+" -> Ulanzi verfügbar")
+if not (url_verfuegbar(ULANZI_URL)):
+    exit("Ulanzi unter der eingegeben URL nicht erreichbar!")
+
+# Ulanzi anschalten
+ulanzi_an_aus(1)
+
+# Intro senden
 intro()
+time.sleep(8)
 
 # Loop starten
-
 while True:
-    mqtt_client.loop()
+
+    uhrzeit = time.strftime("%H:%M")
+    #print(uhrzeit)
+
+    if uhrzeit >= START_ZEIT and uhrzeit < STOP_ZEIT:
+        ulanzi_an_aus(1)
+
+        zaehler = 0
+        for element in WERTE:
+            D_M_D = (WERTE[zaehler].split(","))
+            print(D_M_D)
+            DATENBANK = (D_M_D[0])
+            MEASUREMENT = (D_M_D[1])
+            DATENPUNKT = (D_M_D[2])
+            loop()
+            time.sleep(5)
+            zaehler = zaehler + 1
+    else:
+        ulanzi_an_aus(0)
+        print(uhrzeit+"  Pause, ausserhalb \"Start - Stop\" Bereich!")
+        time.sleep(60)
