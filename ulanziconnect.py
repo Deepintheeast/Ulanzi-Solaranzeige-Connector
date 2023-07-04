@@ -1,168 +1,125 @@
 #!/usr/bin/env python3
 #
-# Ulanzi->Solaranzeige Connector V0.20
+# Ulanzi->Solaranzeige Connector V0.3
 
-# benötigte Bibliotheken importieren
 import logging
-import requests
-import bs4 as bs
 import time
+import funktionen
 
-# diverse Einstellungen
-VERSION_NR = "0.20"
+version_nr = "0.30"
+solaranzeige_url = "http://192.168.x.x"  # URL der Solaranzeige
+ulanzi_url = "http://192.168.x.x"  # URL der Ulanzi Pixelclock
 
-SOLARANZEIGE_URL = "http://192.x.x.x" # URL der Solaranzeige
-ULANZI_URL = "http://192.x.x.x" # URL der Ulanzi Pixelclock
+werte = ("solaranzeige,PV,Leistung",
+         "solaranzeige,Summen,Wh_GesamtHeute")
 
-WERTE = ("solaranzeige,PV,Leistung","solaranzeige,Summen,Wh_GesamtHeute",)
+start_zeit = "06:00"  # Start der Darstellung der Werte auf Ulanzi-Clock
+stop_zeit = "22:30"  # Ende der Darstellung der Werte auf Ulanzi-Clock
 
-START_ZEIT = "06:00" # Start der Darstellung der Werte auf Ulanzi-Clock
-STOP_ZEIT = "22:30" # Ende der Darstellung der Werte auf Ulanzi-Clock
-
-LOG_DATEI = "/home/pi/scripts/ulanzi.log" # Pfad und Name der Logdatei
-LOG_LEVEL = "INFO"  # NOTSET =0, DEBUG =10, INFO =20, WARN =30, ERROR =40, and CRITICAL =50
-
-# ab hier bitte nichts mehr ändern!
+log_datei = "/home/pi/scripts/ulanzi.log"  # Pfad und Name der Logdatei
+log_level = "INFO"  # NOTSET =0, DEBUG =10, INFO =20, WARN =30, ERROR =40, and CRITICAL =50
 
 # Logging definieren
-logging.basicConfig(filename=LOG_DATEI, level=logging.getLevelName(LOG_LEVEL),
+logging.basicConfig(filename=log_datei, filemode='w', level=logging.getLevelName(log_level),
                     format='%(asctime)s - %(message)s',
                     datefmt='%d-%b-%y %H:%M:%S')
 
-## Funktionen definieren ##
-# Funktion URL auf Verfügbarkeit testen
-def url_verfuegbar(url):
-    try:
-        r = requests.get(url)
-        return r.status_code == 200
-    except requests.exceptions.ConnectionError:
-        return False
-# Ende Funktion url_verfuegbar
-#
-# Funktion zur Abfrage der Daten aus der DB über API
-def db_abfrage(DATENBANK,MEASUREMENT,DATENPUNKT):
-      XML = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" \
-            "<solaranzeige><version>1.0</version>" \
-            "<in_out>out</in_out>" \
-            "<database name=\""+DATENBANK+"\">" \
-            "<measurement name=\""+MEASUREMENT+"\">" \
-            "<fieldname name=\""+DATENPUNKT+"\">" \
-            "</fieldname>" \
-            "</measurement>" \
-            "</database></solaranzeige>"
-      logging.debug(XML)
-      headers = {'Content-Type': 'application/xml'} # set what your server accepts
-      data = (requests.post(SOLARANZEIGE_URL+"/api/control.php", data=XML, headers=headers).text)
-      logging.debug(data)
-      soup = bs.BeautifulSoup(data,"xml")
-      for wert in soup.find_all('fieldname'):
-        return DATENBANK,MEASUREMENT,DATENPUNKT,wert.text
-# Ende Funktion db_abfrage
-#
-# Funktion Ulanzi senden
-def ulanzi_senden(url,data):
-    response = requests.post(url, json=data)
-    logging.info(f'{url},{data}')
-# Ende Funktion ulanzi_senden
-#
-# Funktion intro
-def intro():
-    url = ULANZI_URL + '/api/notify'
-    data = {
-        "text": "Ulanzi->Solaranzeige Connector Version "+str(VERSION_NR),
-        "rainbow": bool(1),
-        "repeat": 1
-    }
-    ulanzi_senden(url,data)
-# Ende Funktion intro
-#
-# Start Funktion Ulanzi An/Aus schalten
-def ulanzi_an_aus(x):
-    url = ULANZI_URL + '/api/power'
-    data = {
-        "power": bool(x),
-    }
-    ulanzi_senden(url,data)
-# Ende Funktion Ulanzi An/Aus
-#
-# Start Funtion Loop
-def loop():
 
-    WERT = db_abfrage(DATENBANK,MEASUREMENT,DATENPUNKT)
+# Definition Loop
+def loop():
+    wert = funktionen.db_abfrage(datenbank, measurement, datenpunkt, solaranzeige_url)
+    logging.info({wert})
 
     ################################# Beginn Block Auswertung #################################
 
-    if ((WERT[0])+","+(WERT[1])+","+(WERT[2])) == "solaranzeige,PV,Leistung":
-        print(WERT[3])
+    if ((wert[0]) + "," + (wert[1]) + "," + (wert[2])) == "solaranzeige,PV,Leistung":
+        print(wert[3])
 
-        url = ULANZI_URL + "/api/custom?name="+(WERT[1])+"_"+(WERT[2])
+        url = ulanzi_url + "/api/custom?name=" + (wert[1]) + "_" + (wert[2])
 
         data = {
-            "text": str(int(float(WERT[3]))) + " W",
+            "text": str(int(float(wert[3]))) + " W",
             "icon": 27283,
             "rainbow": bool(1),
+            # "lifetime": 20,
             "duration": 3
         }
-        ulanzi_senden(url,data)
+        funktionen.ulanzi_senden(url, data)
+
     ################################## Ende Block Auswertung ##################################
 
     ################################# Beginn Block Auswertung #################################
 
-    elif (WERT[0])+","+(WERT[1])+","+(WERT[2]) == "solaranzeige,Summen,Wh_GesamtHeute":
-        print(WERT[3])
+    elif (wert[0]) + "," + (wert[1]) + "," + (wert[2]) == "solaranzeige,Summen,Wh_GesamtHeute":
+        print(wert[3])
 
-        url = ULANZI_URL + "/api/custom?"+(WERT[1])+"_"+(WERT[2])
+        url = ulanzi_url + "/api/custom?" + (wert[1]) + "_" + (wert[2])
 
         data = {
-            "text": str(round((float((WERT[3])) / 1000), 2))+" kWh",
+            "text": str(round((float((wert[3])) / 1000), 2)) + " kWh",
             "icon": 51301,
             "color": [252, 186, 3],
-            "duration": 3
+            # "lifetime": 20,
+            # "pushIcon": 1,
+            "duration": 4
         }
-        ulanzi_senden(url,data)
+        funktionen.ulanzi_senden(url, data)
 
     ################################## Ende Block Auswertung ##################################
 
+
     else:
-        print("Nope, keine Auswertung verfügbar für "+str(WERT[0])+","+str(WERT[1])+","+(WERT[2]))
+        logging.info('  Keine passende Abfrage oder Fehler in Abfrage!?')
+        print("Nope, keine Auswertung verfügbar für " + str(wert[0]) + "," + str(wert[1]) + "," + (wert[2]))
+
+
 # Ende Funktion Loop
 
+
 ## Programm starten ##
-print(str(url_verfuegbar(SOLARANZEIGE_URL))+" -> Solaranzeige verfügbar")
-if not (url_verfuegbar(SOLARANZEIGE_URL)):
+print(str(funktionen.url_verfuegbar(solaranzeige_url)) + " -> Solaranzeige verfügbar")
+if not (funktionen.url_verfuegbar(solaranzeige_url)):
+    logging.info('Solaranzeige ist nicht erreichbar !!!')
     exit("Solaranzeige unter der eingegeben URL nicht erreichbar!")
 
-print(str(url_verfuegbar(ULANZI_URL))+" -> Ulanzi verfügbar")
-if not (url_verfuegbar(ULANZI_URL)):
+print(str(funktionen.url_verfuegbar(ulanzi_url)) + " -> Ulanzi verfügbar")
+if not (funktionen.url_verfuegbar(ulanzi_url)):
+    logging.info('Ulanzi ist nicht erreichbar !!!')
     exit("Ulanzi unter der eingegeben URL nicht erreichbar!")
 
 # Ulanzi anschalten
-ulanzi_an_aus(1)
-
+funktionen.ulanzi_an_aus(ulanzi_url, 1)
 # Intro senden
-intro()
-time.sleep(8)
+funktionen.intro(ulanzi_url, version_nr)
 
+time.sleep(8)
+x = True
 # Loop starten
 while True:
 
     uhrzeit = time.strftime("%H:%M")
-    #print(uhrzeit)
+    # print(uhrzeit)
 
-    if uhrzeit >= START_ZEIT and uhrzeit < STOP_ZEIT:
-        ulanzi_an_aus(1)
-
+    if uhrzeit >= start_zeit and uhrzeit < stop_zeit:
+        if not x:
+            funktionen.ulanzi_an_aus(ulanzi_url, 1)
+            logging.info('-- Ulanzi *** an *** gesendet!')
+            x = True
         zaehler = 0
-        for element in WERTE:
-            D_M_D = (WERTE[zaehler].split(","))
+        for element in werte:
+            D_M_D = (werte[zaehler].split(","))
             print(D_M_D)
-            DATENBANK = (D_M_D[0])
-            MEASUREMENT = (D_M_D[1])
-            DATENPUNKT = (D_M_D[2])
+            datenbank = (D_M_D[0])
+            measurement = (D_M_D[1])
+            datenpunkt = (D_M_D[2])
             loop()
-            time.sleep(5)
+            logging.info(f'DB Abfrage mit ** {datenbank} , {measurement} , {datenpunkt} ** gestartet !')
+            time.sleep(3)
             zaehler = zaehler + 1
     else:
-        ulanzi_an_aus(0)
-        print(uhrzeit+"  Pause, ausserhalb \"Start - Stop\" Bereich!")
+        if x:
+            funktionen.ulanzi_an_aus(ulanzi_url, 0)
+            logging.info('-- Ulanzi *** AUS *** gesendet!')
+            x = False
+        print(uhrzeit + "  Pause!")
         time.sleep(60)
