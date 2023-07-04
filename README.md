@@ -1,3 +1,10 @@
+
+04.07.2023 Update auf Version 0.3
+- Funktionen ausgelagert
+- div. Anpassungen
+
+Achtung Wiki noch nicht komplett angepasst -> ist in Arbeit! 👋
+
 # Ulanzi-Solaranzeige-Connector
 Connector zur Anzeige von beliebigen Daten aus 
 [Solaranzeige](https://solaranzeige.de)
