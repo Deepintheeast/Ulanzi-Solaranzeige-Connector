@@ -114,7 +114,7 @@ while True:
             datenpunkt = (D_M_D[2])
             loop()
             logging.info(f'DB Abfrage mit ** {datenbank} , {measurement} , {datenpunkt} ** gestartet !')
-            time.sleep(10)
+            time.sleep(30)
             zaehler = zaehler + 1
     else:
         if x:
