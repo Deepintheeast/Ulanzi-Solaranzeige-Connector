@@ -1,6 +1,6 @@
 12.07.2023
 - Beschreibung und Beispiele an neue Version angepasst!
-- Beispiel "Anzeige Aussentemperatur" hinzugefügt
+- Beispiel ["Anzeige Aussentemperatur"](https://github.com/Deepintheeast/Ulanzi-Solaranzeige-Connector/wiki#beispiel-anzeige-aussentemperatur) hinzugefügt
 
 04.07.2023 Update auf Version 0.3
 - Funktionen ausgelagert
