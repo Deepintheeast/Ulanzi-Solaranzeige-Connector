@@ -1,3 +1,8 @@
+28.07.2023
+- weitere Beispiele hinzugefügt
+- [Beispiel Anzeige "Status Laden" über "Indikator 1"](https://github.com/Deepintheeast/Ulanzi-Solaranzeige-Connector/wiki#beispiel-anzeige-status-laden-%C3%BCber-indikator-1)
+- [Beispiel Anzeige "Status Wechselrichter" über "Indikator 3" und Fehlermeldung über "Notifikation"](https://github.com/Deepintheeast/Ulanzi-Solaranzeige-Connector/wiki#beispiel-anzeige-status-wechselrichter-%C3%BCber-indikator-3-und-fehlermeldung-%C3%BCber-notifikation)
+  
 12.07.2023
 - Beschreibung und Beispiele an neue Version angepasst!
 - Beispiel ["Anzeige Aussentemperatur"](https://github.com/Deepintheeast/Ulanzi-Solaranzeige-Connector/wiki#beispiel-anzeige-aussentemperatur) hinzugefügt
