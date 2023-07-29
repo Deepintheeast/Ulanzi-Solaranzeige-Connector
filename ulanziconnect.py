@@ -77,14 +77,14 @@ def loop():
 
 
 ## Programm starten ##
-print(str(funktionen.url_verfuegbar(solaranzeige_url)) + " -> Solaranzeige verfügbar")
+print(str(funktionen.url_verfuegbar(solaranzeige_url)) + " -> Solaranzeige URL verfügbar")
 if not (funktionen.url_verfuegbar(solaranzeige_url)):
-    logging.info('Solaranzeige ist nicht erreichbar !!!')
+    logging.info('Solaranzeige URL ist nicht erreichbar !!!')
     exit("Solaranzeige unter der eingegeben URL nicht erreichbar!")
 
-print(str(funktionen.url_verfuegbar(ulanzi_url)) + " -> Ulanzi verfügbar")
+print(str(funktionen.url_verfuegbar(ulanzi_url)) + " -> Ulanzi URL verfügbar")
 if not (funktionen.url_verfuegbar(ulanzi_url)):
-    logging.info('Ulanzi ist nicht erreichbar !!!')
+    logging.info('Ulanzi URL ist nicht erreichbar !!!')
     exit("Ulanzi unter der eingegeben URL nicht erreichbar!")
 
 # Ulanzi anschalten
