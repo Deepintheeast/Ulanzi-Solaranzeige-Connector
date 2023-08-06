@@ -1,6 +1,6 @@
 06.08 2023
 Anpassung an awtrix-light 0.72
-- Integration "neue Übergangseffekte
+- Integration "neue Übergangseffekte"
 
 28.07.2023
 - weitere Beispiele hinzugefügt
