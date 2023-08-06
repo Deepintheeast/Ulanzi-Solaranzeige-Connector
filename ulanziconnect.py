@@ -18,7 +18,7 @@ stop_zeit = "22:30"  # Ende der Darstellung der Werte auf Ulanzi-Clock
 
 trans_effect = "4"  # Übergangseffekt  0 - Slide, 1 - Dim, 2 - Zoom, 3 - Rotate, 4 - Pixelate
                     # 5 - Curtain, 6 - Ripple, 7 - Blink, 8 - Reload, 9 - Fade
-trans_effect_time = 500  #Effekt-Zeit in mS
+trans_effect_time = 500  # Effekt-Zeit in mS
 
 log_datei = "/home/pi/scripts/ulanzi.log"  # Pfad und Name der Logdatei
 log_level = "INFO"  # NOTSET =0, DEBUG =10, INFO =20, WARN =30, ERROR =40, and CRITICAL =50
