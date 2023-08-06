@@ -1,3 +1,7 @@
+06.08 2023
+Anpassung an awtrix-light 0.72
+- Integration "neue Übergangseffekte
+
 28.07.2023
 - weitere Beispiele hinzugefügt
 - [Beispiel Anzeige "Status Laden" über "Indikator 1"](https://github.com/Deepintheeast/Ulanzi-Solaranzeige-Connector/wiki#beispiel-anzeige-status-laden-%C3%BCber-indikator-1)
