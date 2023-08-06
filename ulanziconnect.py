@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 #
-# Ulanzi->Solaranzeige Connector V0.3
+# Ulanzi->Solaranzeige Connector V0.31
 
 import logging
 import time
 import funktionen
 
-version_nr = "0.30"
+version_nr = "0.31"
 solaranzeige_url = "http://192.168.x.x"  # URL der Solaranzeige
 ulanzi_url = "http://192.168.x.x"  # URL der Ulanzi Pixelclock
 
@@ -15,6 +15,10 @@ werte = ("solaranzeige,PV,Leistung",
 
 start_zeit = "06:00"  # Start der Darstellung der Werte auf Ulanzi-Clock
 stop_zeit = "22:30"  # Ende der Darstellung der Werte auf Ulanzi-Clock
+
+trans_effect = "4"  # Übergangseffekt  0 - Slide, 1 - Dim, 2 - Zoom, 3 - Rotate, 4 - Pixelate
+                    # 5 - Curtain, 6 - Ripple, 7 - Blink, 8 - Reload, 9 - Fade
+trans_effect_time = 500  #Effekt-Zeit in mS
 
 log_datei = "/home/pi/scripts/ulanzi.log"  # Pfad und Name der Logdatei
 log_level = "INFO"  # NOTSET =0, DEBUG =10, INFO =20, WARN =30, ERROR =40, and CRITICAL =50
@@ -89,6 +93,16 @@ if not (funktionen.url_verfuegbar(ulanzi_url)):
 
 # Ulanzi anschalten
 funktionen.ulanzi_an_aus(ulanzi_url, 1)
+
+# diverse Einstellungen vornehmen (senden)
+# Übergangseffekt etc. festlegen
+url = ulanzi_url + "/api/settings"
+data = {
+     "TEFF" : trans_effect,
+     "TSPEED" : trans_effect_time
+    }
+funktionen.ulanzi_senden(url,data)
+
 # Intro senden
 funktionen.intro(ulanzi_url, version_nr)
 
