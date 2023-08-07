@@ -39,7 +39,7 @@ def loop():
     if ((wert[0]) + "," + (wert[1]) + "," + (wert[2])) == "solaranzeige,PV,Leistung":
         print(wert[3])
 
-        url = ulanzi_url + "/api/custom?name=" + (wert[1]) + "_" + (wert[2])
+        url = ulanzi_url + "/api/custom?name="+(wert[1])+(wert[2])     
 
         data = {
             "text": str(int(float(wert[3]))) + " W",
@@ -57,7 +57,7 @@ def loop():
     elif (wert[0]) + "," + (wert[1]) + "," + (wert[2]) == "solaranzeige,Summen,Wh_GesamtHeute":
         print(wert[3])
 
-        url = ulanzi_url + "/api/custom?" + (wert[1]) + "_" + (wert[2])
+        url = ulanzi_url + "/api/custom?name="+(wert[1])+(wert[2])
 
         data = {
             "text": str(round((float((wert[3])) / 1000), 2)) + " kWh",
