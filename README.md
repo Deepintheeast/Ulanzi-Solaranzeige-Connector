@@ -1,3 +1,7 @@
+09.08 2023 Update auf Version 0.32
+- Anpassung an awtrix-light 0.73
+- Integration "neuer Übergangseffekt -> 0-random"
+
 06.08 2023 Update auf Version 0.31
 - Anpassung an awtrix-light 0.72
 - Integration "neue Übergangseffekte"
