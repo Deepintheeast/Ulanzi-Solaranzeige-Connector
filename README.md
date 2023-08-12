@@ -25,7 +25,7 @@ Achtung Wiki noch nicht komplett angepasst -> ist in Arbeit! 👋
 Connector zur Anzeige von beliebigen Daten aus 
 [Solaranzeige](https://solaranzeige.de)
 auf einer 
-[Ulanzi (awtrix light) TC001 PixelClock(Affiliate-Link)](https://www.ulanzi.de/products/ulanzi-pixel-smart-uhr-2882?_pos=1&_psq=pixel&_ss=e&_v=1.0&ref=z6pvugfl
+["Ulanzi Pixel Clock mit Awtrix Light"(Affiliate-Link)](https://www.ulanzi.de/products/ulanzi-pixel-smart-uhr-2882?_pos=1&_psq=pixel&_ss=e&_v=1.0&ref=z6pvugfl
 ) !
 
 
