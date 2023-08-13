@@ -3,6 +3,7 @@
 
 import requests
 import bs4 as bs
+import time
 
 # Funktion URL auf Verfügbarkeit testen
 def url_verfuegbar(url):
@@ -41,6 +42,11 @@ def ulanzi_senden(url,data):
 #
 # Funktion intro
 def intro(ulanzi_url,version_nr):
+    url = ulanzi_url + "/api/settings"
+    data = {
+        "BRI": 255}
+    ulanzi_senden(url, data)
+
     url = ulanzi_url + '/api/notify'
     data = {
         "text": "Ulanzi->Solaranzeige Connector Version "+str(version_nr),
@@ -60,3 +66,23 @@ def ulanzi_an_aus(ulanzi_url,x):
     ulanzi_senden(url,data)
 # Ende Funktion Ulanzi An/Aus
 #
+# Start Helligkeit einstellen
+def ulanzi_hell_set(ulanzi_url,h):
+    url = ulanzi_url + "/api/settings"
+    if h in ['a', 'A']:
+        data = {
+            "ABRI": bool(1)}
+    else:
+        data = {
+            "ABRI": bool(0),
+            "BRI":h }
+    ulanzi_senden(url, data)
+# Ende Funktion Helligkeit einstellen
+#
+# Start Funktion Modecheck
+def mode_check(start_zeit,stop_zeit):
+    uhrzeit = time.strftime("%H:%M")
+    x = "N"
+    if uhrzeit >= start_zeit and uhrzeit < stop_zeit:
+        x = "D"
+    return x
