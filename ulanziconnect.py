@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# Ulanzi->Solaranzeige Connector V0.32
+# Ulanzi->Solaranzeige Connector V0.4
 
 import logging
 import time
@@ -16,40 +16,30 @@ config = ConfigParser(
 
 try:
     config.read('settings.ini')
-    print("ini Datei eingelesen")
+    print("settings.ini eingelesen")
 except:
-    print("settings.ini format error")
+    print("settings.ini Error! Bitte überprüfen!")
     raise SystemExit()
 
 #print(config.sections())
 
 # Werte aus ini Datei zuweisen #
 version_nr = config['SCRIPT']['version_nr']
-solaranzeige_url = config['SOLARANZEIGE']['url']
-ulanzi_url= config['ULANZI']['url']
+log_datei = config['SCRIPT']['log_datei']
+log_level = config['SCRIPT']['log_level']
 
+solaranzeige_url = config['SOLARANZEIGE']['url']
+werte = config['SOLARANZEIGE']['werte'].split()
+
+ulanzi_url= config['ULANZI']['url']
 start_zeit = config['ULANZI']['start_zeit']
 stop_zeit = config['ULANZI']['stop_zeit']
-
 day_mode_start = config['ULANZI']['start_daymode']
 day_hell = config['ULANZI']['helligkeit_daymode']
 night_mode_start = config['ULANZI']['start_nightmode']
 night_hell = config['ULANZI']['helligkeit_nightmode']
-
 trans_effect = config['ULANZI']['trans_effect']
 trans_effect_time = config['ULANZI']['trans_effect_time']
-
-log_datei = config['SCRIPT']['log_datei']
-log_level = config['SCRIPT']['log_level']
-
-werte = ("solaranzeige,PV,Leistung",
-         "solaranzeige,Summen,Wh_GesamtHeute",
-         "Pylontech,Batterie,SOC",
-         "solaranzeige,aktuellesWetter,Temperatur",
-         "solaranzeige,Service,RaspiTemp",
-         "solaranzeige,Batterie,Strom",
-         "solaranzeige,Service,IntModus")
-
 
 # Logging definieren
 logging.basicConfig(filename=log_datei, filemode='w', level=logging.getLevelName(log_level),
