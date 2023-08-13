@@ -5,10 +5,42 @@
 import logging
 import time
 import funktionen
+from configparser import (
+    ConfigParser,
+    ExtendedInterpolation
+)
 
-version_nr = "0.32"
-solaranzeige_url = "http://192.168.169.233"  # URL der Solaranzeige
-ulanzi_url = "http://192.168.169.235"  # URL der Ulanzi Pixelclock
+config = ConfigParser(
+    interpolation=ExtendedInterpolation()
+)
+
+try:
+    config.read('settings.ini')
+    print("ini Datei eingelesen")
+except:
+    print("settings.ini format error")
+    raise SystemExit()
+
+#print(config.sections())
+
+# Werte aus ini Datei zuweisen #
+version_nr = config['SCRIPT']['version_nr']
+solaranzeige_url = config['SOLARANZEIGE']['url']
+ulanzi_url= config['ULANZI']['url']
+
+start_zeit = config['ULANZI']['start_zeit']
+stop_zeit = config['ULANZI']['stop_zeit']
+
+day_mode_start = config['ULANZI']['start_daymode']
+day_hell = config['ULANZI']['helligkeit_daymode']
+night_mode_start = config['ULANZI']['start_nightmode']
+night_hell = config['ULANZI']['helligkeit_nightmode']
+
+trans_effect = config['ULANZI']['trans_effect']
+trans_effect_time = config['ULANZI']['trans_effect_time']
+
+log_datei = config['SCRIPT']['log_datei']
+log_level = config['SCRIPT']['log_level']
 
 werte = ("solaranzeige,PV,Leistung",
          "solaranzeige,Summen,Wh_GesamtHeute",
@@ -18,27 +50,11 @@ werte = ("solaranzeige,PV,Leistung",
          "solaranzeige,Batterie,Strom",
          "solaranzeige,Service,IntModus")
 
-start_zeit = "06:00"  # Start der Darstellung der Werte auf Ulanzi-Clock
-stop_zeit = "23:30"  # Ende der Darstellung der Werte auf Ulanzi-Clock
-
-day_mode_start = "07:00" # Beginn Day-Mode
-day_hell = "a" # Helligkeit im Day-Mode "0-255" oder "A" = Automatik
-
-night_mode_start = "21:00" # Beginn Night-Mode
-night_hell = "a" # Helligkeit im Night-Mode "0-255" oder "A" = Automatik
-
-trans_effect = "0"  # Übergangseffekt  0 - Zufall, 1 - Slide, 2 - Dim, 3 - Zoom, 4 - Rotate
-                    # 5 - Pixelate, 6 - Curtain, 7 - Ripple, 8 - Blink, 9 - Reload, 10 - Fade
-trans_effect_time = 500  #Effekt-Zeit in mS
-
-log_datei = "/home/pi/scripts/ulanzi.log"  # Pfad und Name der Logdatei
-log_level = "DEBUG"  # NOTSET =0, DEBUG =10, INFO =20, WARN =30, ERROR =40, and CRITICAL =50
 
 # Logging definieren
 logging.basicConfig(filename=log_datei, filemode='w', level=logging.getLevelName(log_level),
                     format='%(asctime)s - %(message)s',
                     datefmt='%d-%b-%y %H:%M:%S')
-
 
 # Definition Loop
 def loop():
