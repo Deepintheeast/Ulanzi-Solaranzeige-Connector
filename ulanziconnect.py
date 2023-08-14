@@ -40,7 +40,8 @@ night_mode_start = config['ULANZI']['start_nightmode']
 night_hell = config['ULANZI']['helligkeit_nightmode']
 trans_effect = config['ULANZI']['trans_effect']
 trans_effect_time = config['ULANZI']['trans_effect_time']
-
+app_life_time = config['ULANZI']['app_life_time']
+print(app_life_time)
 # Logging definieren
 logging.basicConfig(filename=log_datei, filemode='w', level=logging.getLevelName(log_level),
                     format='%(asctime)s - %(message)s',
@@ -51,6 +52,8 @@ def loop():
     wert = funktionen.db_abfrage(datenbank, measurement, datenpunkt, solaranzeige_url)
     logging.info({wert})
 
+
+
     ################################# Beginn Block Auswertung #################################
 
     if ((wert[0]) + "," + (wert[1]) + "," + (wert[2])) == "solaranzeige,PV,Leistung":
@@ -60,10 +63,9 @@ def loop():
 
         data = {
             "text": str(int(float(wert[3]))) + " W",
-            #"pos": 1,
+            #"lifetime": int(app_life_time),
             "icon": 27283,
             "rainbow": bool(1),
-            # "lifetime": 20,
             "duration": 3
         }
         funktionen.ulanzi_senden(url, data)
@@ -79,11 +81,9 @@ def loop():
         url = ulanzi_url + "/api/custom?name="+(wert[1])+(wert[2])
         data = {
             "text": str(round((float((wert[3])) / 1000), 2)) + " kWh",
-            #"pos": 2,
+            #"lifetime": int(app_life_time),
             "icon": 51301,
             "color": [252, 186, 3],
-            # "lifetime": 20,
-            # "pushIcon": 1,
             "duration": 4
         }
         funktionen.ulanzi_senden(url, data)
@@ -99,9 +99,8 @@ def loop():
 
         data = {
             "text": "Aussentemp.: "+str(round(float(wert[3])))+"°C",
-            #"pos": 3,
+            #"lifetime": int(app_life_time),
             "rainbow": bool(1),
-            # "lifetime": 20,
             "duration": 4
         }
         funktionen.ulanzi_senden(url, data)
@@ -115,6 +114,7 @@ def loop():
         if wert[3] <= str(35):
             data = {
                 "text": "T:"+str(round(float(wert[3])))+"°C",
+                #"lifetime": int(app_life_time),
                 "icon": 9718,
                 "color": [0, 204, 0],
                 "duration": 4
@@ -122,6 +122,7 @@ def loop():
         elif wert[3] >= str(36) and wert[3] <= str(55):
             data = {
                 "text": "T:" + str(round(float(wert[3]))) + "°C",
+                #"lifetime": int(app_life_time),
                 "icon": 9718,
                 "color": [255, 153, 0],
                 "duration": 4
@@ -129,6 +130,7 @@ def loop():
         elif wert[3] >= str(56):
             data = {
                 "text": "T:" + str(round(float(wert[3]))) + "°C",
+                #"lifetime": int(app_life_time),
                 "icon": 9718,
                 "color": [255, 0, 0],
                 "duration": 4
@@ -147,14 +149,13 @@ def loop():
             data = {
                 "color": [0, 0, 0]
             }
-            funktionen.ulanzi_senden(url, data)
 
         else:
             data = {
                 "color": [0, 255, 0],
                 "blink": 1200
             }
-            funktionen.ulanzi_senden(url, data)
+        funktionen.ulanzi_senden(url, data)
 
     ################################## Ende Block Auswertung ##################################
 
@@ -169,28 +170,27 @@ def loop():
             data = {
                 "color": [0, 255, 0]
             }
-            funktionen.ulanzi_senden(url, data)
 
         elif (wert[3]) == "4":  # Line(Netz)modus
             data = {
                 "color": [0, 0, 255]
             }
-            funktionen.ulanzi_senden(url, data)
 
         elif (wert[3]) == "5":  # Error(Fehler)modus
             data = {
                 "color": [255, 0, 0],
                 "blink": 100
             }
-            funktionen.ulanzi_senden(url, data)
+        funktionen.ulanzi_senden(url, data)
 
-            url = ulanzi_url + '/api/notify'
+        url = ulanzi_url + '/api/notify'
+        if (wert[3]) == "5":  # Error(Fehler)modus
             data = {
                 "text": "Achtung! Wechselrichter befindet sich im Fehlermodus! Bitte überprüfen! ",
                 "color": [255, 0, 0],
                 "hold": bool(1)
             }
-            funktionen.ulanzi_senden(url, data)
+        funktionen.ulanzi_senden(url, data)
 
     ################################## Ende Block Auswertung ##################################
 
@@ -204,57 +204,52 @@ def loop():
         if int(wert[3]) >= 1 and int(wert[3]) <= 10:
             data = {
                 "text": (wert[3]) + " %",
-                #"pos": 4,
+                #"lifetime": int(app_life_time),
                 "icon": 12832,
                 "color": [154, 250, 10],
                 "duration": 3
             }
-            #funktionen.ulanzi_senden(url, data)
 
         elif int(wert[3]) >= 11 and int(wert[3]) <= 30:
             data = {
                 "text": (wert[3]) + " %",
-                #"pos": 4,
+                #"lifetime": int(app_life_time),
                 "icon": 6359,
                 "color": [154, 250, 10],
                 "duration": 3
             }
-            #funktionen.ulanzi_senden(url, data)
 
         elif int(wert[3]) >= 31 and int(wert[3]) <= 50:
             data = {
                 "text": (wert[3]) + " %",
-                #"pos": 4,
+                #"lifetime": int(app_life_time),
                 "icon": 6360,
                 "color": [154, 250, 10],
                 "duration": 3
             }
-            #funktionen.ulanzi_senden(url, data)
 
         elif int(wert[3]) >= 51 and int(wert[3]) <= 70:
             data = {
                 "text": (wert[3]) + " %",
-                #"pos": 4,
+                #"lifetime": int(app_life_time),
                 "icon": 6361,
                 "color": [154, 250, 10],
                 "duration": 3
             }
-            #funktionen.ulanzi_senden(url, data)
 
         elif int(wert[3]) >= 71 and int(wert[3]) <= 90:
             data = {
                 "text": (wert[3]) + " %",
-                #"pos": 4,
+                #"lifetime": int(app_life_time),
                 "icon": 6362,
                 "color": [154, 250, 10],
                 "duration": 3
             }
-            #funktionen.ulanzi_senden(url, data)
 
         elif int(wert[3]) >= 91 and int(wert[3]) <= 100:
             data = {
                 "text": (wert[3]) + " %",
-                #"pos": 4,
+                #"lifetime": int(app_life_time),
                 "icon": 6363,
                 "color": [154, 250, 10],
                 "duration": 3
@@ -294,6 +289,10 @@ data = {
     }
 funktionen.ulanzi_senden(url,data)
 
+funktionen.kill_indicator(ulanzi_url,1)
+funktionen.kill_indicator(ulanzi_url,2)
+funktionen.kill_indicator(ulanzi_url,3)
+
 
 # Intro senden
 funktionen.intro(ulanzi_url, version_nr)
@@ -330,11 +329,13 @@ while True:
             datenpunkt = (D_M_D[2])
             loop()
             logging.info(f'DB Abfrage mit ** {datenbank} , {measurement} , {datenpunkt} ** gestartet !')
-            time.sleep(5)
+            time.sleep(10)
             zaehler = zaehler + 1
     else:
         if x:
-            funktionen.ulanzi_an_aus(ulanzi_url,0)
+            #funktionen.ulanzi_an_aus(ulanzi_url,0)
+            funktionen.kill_indicator(ulanzi_url,1)
+            funktionen.kill_indicator(ulanzi_url,3)
             logging.info('-- Ulanzi *** AUS *** gesendet!')
             x = False
         print(uhrzeit + "  Pause!")

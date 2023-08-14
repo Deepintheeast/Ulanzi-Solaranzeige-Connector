@@ -86,3 +86,9 @@ def mode_check(start_zeit,stop_zeit):
     if uhrzeit >= start_zeit and uhrzeit < stop_zeit:
         x = "D"
     return x
+# Indikatoren löschen
+def kill_indicator(ulanzi_url,Nummer):
+    url = ulanzi_url + "/api/indicator"+str(Nummer)
+    data = {
+        }
+    ulanzi_senden(url, data)
