@@ -41,7 +41,8 @@ night_hell = config['ULANZI']['helligkeit_nightmode']
 trans_effect = config['ULANZI']['trans_effect']
 trans_effect_time = config['ULANZI']['trans_effect_time']
 app_life_time = config['ULANZI']['app_life_time']
-print(app_life_time)
+night_show = config.getboolean('ULANZI','night_show')
+print(night_show)
 # Logging definieren
 logging.basicConfig(filename=log_datei, filemode='w', level=logging.getLevelName(log_level),
                     format='%(asctime)s - %(message)s',
@@ -304,7 +305,7 @@ x = True
 while True:
     # Helligkeit setzen Start
     mode = funktionen.mode_check(day_mode_start, night_mode_start)
-    print(mode+"-Mode")
+    #print(mode+"-Mode")
     if mode == "D":
         funktionen.ulanzi_hell_set(ulanzi_url, day_hell)
         print("** -> Day_hell gesendet")
@@ -334,10 +335,12 @@ while True:
             zaehler = zaehler + 1
     else:
         if x:
-            #funktionen.ulanzi_an_aus(ulanzi_url,0)
+            if not night_show:
+                funktionen.ulanzi_an_aus(ulanzi_url,0)
+
             funktionen.kill_indicator(ulanzi_url,1)
             funktionen.kill_indicator(ulanzi_url,3)
             logging.info('-- Ulanzi *** AUS *** gesendet!')
             x = False
-        print(uhrzeit + "  Pause!")
+        print(uhrzeit + ' Night-Show is '+str(night_show))
         time.sleep(60)
