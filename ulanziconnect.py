@@ -21,16 +21,9 @@ except:
     print("settings.ini Error! Bitte überprüfen!")
     raise SystemExit()
 
-#print(config.sections())
-
 # Werte aus ini Datei zuweisen #
-version_nr = config['SCRIPT']['version_nr']
-log_datei = config['SCRIPT']['log_datei']
-log_level = config['SCRIPT']['log_level']
-
 solaranzeige_url = config['SOLARANZEIGE']['url']
-werte = config['SOLARANZEIGE']['werte'].split()
-
+werte = config['SOLARANZEIGE']['app_werte'].split()
 ulanzi_url= config['ULANZI']['url']
 start_zeit = config['ULANZI']['start_zeit']
 stop_zeit = config['ULANZI']['stop_zeit']
@@ -42,7 +35,11 @@ trans_effect = config['ULANZI']['trans_effect']
 trans_effect_time = config['ULANZI']['trans_effect_time']
 app_life_time = config['ULANZI']['app_life_time']
 night_show = config.getboolean('ULANZI','night_show')
-print(night_show)
+night_show_app = config['ULANZI']['night_show_app']
+version_nr = config['SCRIPT']['version_nr']
+log_datei = config['SCRIPT']['log_datei']
+log_level = config['SCRIPT']['log_level']
+
 # Logging definieren
 logging.basicConfig(filename=log_datei, filemode='w', level=logging.getLevelName(log_level),
                     format='%(asctime)s - %(message)s',
@@ -54,7 +51,6 @@ def loop():
     logging.info({wert})
 
 
-
     ################################# Beginn Block Auswertung #################################
 
     if ((wert[0]) + "," + (wert[1]) + "," + (wert[2])) == "solaranzeige,PV,Leistung":
@@ -63,9 +59,9 @@ def loop():
         url = ulanzi_url + "/api/custom?name="+(wert[1])+(wert[2])
 
         data = {
-            "text": str(int(float(wert[3]))) + " W",
+            "text": str(int(float(wert[3]))) + " W", # darzustellender Wert/Text
             "lifetime": int(app_life_time),
-            "icon": 27283,
+            "icon": 27283, # darzustellendes Icon
             "rainbow": bool(1),
             "duration": 3
         }
@@ -154,7 +150,8 @@ def loop():
         else:
             data = {
                 "color": [0, 255, 0],
-                "blink": 1200
+                #"blink": 1200
+                "fade": 5000
             }
         funktionen.ulanzi_senden(url, data)
 
@@ -283,48 +280,52 @@ if not (funktionen.url_verfuegbar(ulanzi_url)):
 funktionen.ulanzi_an_aus(ulanzi_url, 1)
 
 # diverse Einstellungen vornehmen (senden)
-# Übergangseffekt etc. festlegen
-url = ulanzi_url + "/api/settings"
-data = {
-     "TEFF" : trans_effect,
-     "TSPEED" : trans_effect_time
-    }
-funktionen.ulanzi_senden(url,data)
-
-funktionen.kill_indicator(ulanzi_url,1)
-funktionen.kill_indicator(ulanzi_url,2)
-funktionen.kill_indicator(ulanzi_url,3)
-
+# Übergangseffekt etc. festlegen, Indikatoren zurücksetzen
+funktionen.ulanzi_effekt_set(ulanzi_url,trans_effect,trans_effect_time)
+funktionen.kill_all_indicator(ulanzi_url)
+funktionen.ulanzi_auto_trans(ulanzi_url,1)
 
 # Intro senden
 funktionen.intro(ulanzi_url, version_nr)
-
 time.sleep(8)
+
+# Helligkeit einstellen
+if funktionen.mode_check(day_mode_start, night_mode_start) == "D":
+    funktionen.ulanzi_hell_set(ulanzi_url, day_hell)
+else:
+    funktionen.ulanzi_hell_set(ulanzi_url, night_hell)
+
 x = True
+y = True
+
 # Loop starten
 while True:
     # Helligkeit setzen Start
     mode = funktionen.mode_check(day_mode_start, night_mode_start)
     #print(mode+"-Mode")
-    if mode == "D":
+    if y and mode == "D":
         funktionen.ulanzi_hell_set(ulanzi_url, day_hell)
         print("** -> Day_hell gesendet")
-    elif mode == "N":
+        y = False
+    elif not y and mode == "N":
         funktionen.ulanzi_hell_set(ulanzi_url, night_hell)
         print("** -> Night_hell gesendet")
+        y = True
     # Helligkeit setzen Ende
 
     uhrzeit = time.strftime("%H:%M")
-    # print(uhrzeit)
+    #print(uhrzeit)
 
     if uhrzeit >= start_zeit and uhrzeit < stop_zeit:
         if not x:
             funktionen.ulanzi_an_aus(ulanzi_url, 1)
+            funktionen.ulanzi_auto_trans(ulanzi_url,1)
             logging.info('-- Ulanzi *** an *** gesendet!')
             x = True
         zaehler = 0
         for element in werte:
             D_M_D = (werte[zaehler].split(","))
+            print(time.strftime("%H:%M:%S"))
             print(D_M_D)
             datenbank = (D_M_D[0])
             measurement = (D_M_D[1])
@@ -337,10 +338,10 @@ while True:
         if x:
             if not night_show:
                 funktionen.ulanzi_an_aus(ulanzi_url,0)
+                logging.info('-- Ulanzi *** AUS *** gesendet!')
+            funktionen.ulanzi_night_show_app_set(ulanzi_url,night_show_app)
+            funktionen.ulanzi_auto_trans(ulanzi_url,0)
+        x = False
 
-            funktionen.kill_indicator(ulanzi_url,1)
-            funktionen.kill_indicator(ulanzi_url,3)
-            logging.info('-- Ulanzi *** AUS *** gesendet!')
-            x = False
         print(uhrzeit + ' Night-Show is '+str(night_show))
         time.sleep(60)
