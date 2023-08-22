@@ -140,4 +140,3 @@ def ulanzi_auto_trans(ulanzi_url,on_off):
     ulanzi_senden(url, data)
 # Ende Funktion
 # ----------------------------------
-# Ulanzi init
