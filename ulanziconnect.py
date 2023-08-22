@@ -34,6 +34,7 @@ night_hell = config['ULANZI']['helligkeit_nightmode']
 trans_effect = config['ULANZI']['trans_effect']
 trans_effect_time = config['ULANZI']['trans_effect_time']
 app_life_time = config['ULANZI']['app_life_time']
+app_show_time = config['ULANZI']['app_show_time']
 night_show = config.getboolean('ULANZI','night_show')
 night_show_app = config['ULANZI']['night_show_app']
 version_nr = config['SCRIPT']['version_nr']
@@ -63,7 +64,7 @@ def loop():
             "lifetime": int(app_life_time),
             "icon": 27283, # darzustellendes Icon
             "rainbow": bool(1),
-            "duration": 3
+            "duration": app_show_time
         }
         funktionen.ulanzi_senden(url, data)
 
@@ -81,7 +82,7 @@ def loop():
             "lifetime": int(app_life_time),
             "icon": 51301,
             "color": [252, 186, 3],
-            "duration": 4
+            "duration": app_show_time
         }
         funktionen.ulanzi_senden(url, data)
 
@@ -98,7 +99,7 @@ def loop():
             "text": "Aussentemp.: "+str(round(float(wert[3])))+"°C",
             "lifetime": int(app_life_time),
             "rainbow": bool(1),
-            "duration": 4
+            "duration": app_show_time
         }
         funktionen.ulanzi_senden(url, data)
 
@@ -114,7 +115,7 @@ def loop():
                 "lifetime": int(app_life_time),
                 "icon": 9718,
                 "color": [0, 204, 0],
-                "duration": 4
+                "duration": app_show_time
             }
         elif wert[3] >= str(36) and wert[3] <= str(55):
             data = {
@@ -122,7 +123,7 @@ def loop():
                 "lifetime": int(app_life_time),
                 "icon": 9718,
                 "color": [255, 153, 0],
-                "duration": 4
+                "duration": app_show_time
             }
         elif wert[3] >= str(56):
             data = {
@@ -130,7 +131,7 @@ def loop():
                 "lifetime": int(app_life_time),
                 "icon": 9718,
                 "color": [255, 0, 0],
-                "duration": 4
+                "duration": app_show_time
             }
         funktionen.ulanzi_senden(url, data)
     ################################## Ende Block Auswertung ##################################
@@ -206,7 +207,7 @@ def loop():
                 "lifetime": int(app_life_time),
                 "icon": 12832,
                 "color": [154, 250, 10],
-                "duration": 3
+                "duration": app_show_time
             }
 
         elif int(wert[3]) >= 11 and int(wert[3]) <= 30:
@@ -215,7 +216,7 @@ def loop():
                 "lifetime": int(app_life_time),
                 "icon": 6359,
                 "color": [154, 250, 10],
-                "duration": 3
+                "duration": app_show_time
             }
 
         elif int(wert[3]) >= 31 and int(wert[3]) <= 50:
@@ -224,7 +225,7 @@ def loop():
                 "lifetime": int(app_life_time),
                 "icon": 6360,
                 "color": [154, 250, 10],
-                "duration": 3
+                "duration": app_show_time
             }
 
         elif int(wert[3]) >= 51 and int(wert[3]) <= 70:
@@ -233,7 +234,7 @@ def loop():
                 "lifetime": int(app_life_time),
                 "icon": 6361,
                 "color": [154, 250, 10],
-                "duration": 3
+                "duration": app_show_time
             }
 
         elif int(wert[3]) >= 71 and int(wert[3]) <= 90:
@@ -242,7 +243,7 @@ def loop():
                 "lifetime": int(app_life_time),
                 "icon": 6362,
                 "color": [154, 250, 10],
-                "duration": 3
+                "duration": app_show_time
             }
 
         elif int(wert[3]) >= 91 and int(wert[3]) <= 100:
@@ -251,7 +252,7 @@ def loop():
                 "lifetime": int(app_life_time),
                 "icon": 6363,
                 "color": [154, 250, 10],
-                "duration": 3
+                "duration": app_show_time
             }
         funktionen.ulanzi_senden(url, data)
 
