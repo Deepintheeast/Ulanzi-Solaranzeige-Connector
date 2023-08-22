@@ -35,6 +35,8 @@ trans_effect = config['ULANZI']['trans_effect']
 trans_effect_time = config['ULANZI']['trans_effect_time']
 app_life_time = config['ULANZI']['app_life_time']
 app_show_time = config['ULANZI']['app_show_time']
+text_uppercase = config.getboolean('ULANZI','text_uppercase')
+text_scrollspeed = config['ULANZI']['text_scrollspeed']
 night_show = config.getboolean('ULANZI','night_show')
 night_show_app = config['ULANZI']['night_show_app']
 version_nr = config['SCRIPT']['version_nr']
@@ -282,6 +284,7 @@ funktionen.ulanzi_an_aus(ulanzi_url, 1)
 
 # diverse Einstellungen vornehmen (senden)
 # Übergangseffekt etc. festlegen, Indikatoren zurücksetzen
+funktionen.ulanz_init(ulanzi_url,text_uppercase,text_scrollspeed)
 funktionen.ulanzi_effekt_set(ulanzi_url,trans_effect,trans_effect_time)
 funktionen.kill_all_indicator(ulanzi_url)
 funktionen.ulanzi_auto_trans(ulanzi_url,1)

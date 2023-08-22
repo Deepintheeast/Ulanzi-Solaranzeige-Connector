@@ -1,5 +1,5 @@
 ## Funktionen definieren ##
-## bitte hier nichts verändern ##
+## bitte hier nichts verändern !!! ##
 
 import requests
 import bs4 as bs
@@ -37,8 +37,7 @@ def db_abfrage(datenbank,measurement,datenpunkt,solaranzeige_url):
 # Funktion Daten an Ulanzi senden
 def ulanzi_senden(url,data):
     response = requests.post(url, json=data)
-    # print('#### Status Code:')
-    print('#### Status Code: ' + str(response.status_code) + ' ####')
+    #print('#### Status Code: ' + str(response.status_code) + ' ####')
     #requests.exceptions.ConnectionError
     #logging.info(f'{url},{data}')
 
@@ -54,7 +53,6 @@ def intro(ulanzi_url,version_nr):
     url = ulanzi_url + '/api/notify'
     data = {
         "text": "Ulanzi->Solaranzeige Connector Version "+str(version_nr),
-        #"text": "Have Fun!",
         "rainbow": bool(1),
         "repeat": 1
     }
@@ -140,3 +138,11 @@ def ulanzi_auto_trans(ulanzi_url,on_off):
     ulanzi_senden(url, data)
 # Ende Funktion
 # ----------------------------------
+# Ulanzi init
+def ulanz_init(ulanzi_url,text_uppercase,text_scrollspeed):
+    url = ulanzi_url + "/api/settings"
+    data = {
+        "UPPERCASE": text_uppercase ,
+        "SSPEED": text_scrollspeed
+    }
+    ulanzi_senden(url, data)
