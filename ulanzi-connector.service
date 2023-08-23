@@ -1,5 +1,5 @@
 [Unit]
-Description=Ulanzi-Solaranzeige-Connector Service
+Description=UlanziSolaranzeigeConnector Service
 After=multi-user.target
 
 [Service]
