@@ -5,7 +5,7 @@ After=multi-user.target
 [Service]
 Type=idle
 User=pi
-ExecStart=/usr/bin/python3 /home/pi/scripts/ulanziconnect.py /dev/null 2>&1
+ExecStart=/usr/bin/python3 /home/pi/scripts/Ulanzi-Solaranzeige-Connector/ulanziconnect.py /dev/null 2>&1
 Restart=always
 RestartSec=5
 
