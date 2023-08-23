@@ -55,6 +55,7 @@ def loop():
 
 
     ################################# Beginn Block Auswertung #################################
+    ################################ "solaranzeige,PV,Leistung" ###############################
 
     if ((wert[0]) + "," + (wert[1]) + "," + (wert[2])) == "solaranzeige,PV,Leistung":
         print(wert[3])
@@ -74,6 +75,7 @@ def loop():
 
 
     ################################# Beginn Block Auswertung #################################
+    ########################### solaranzeige,Summen,Wh_GesamtHeute ############################
 
     elif (wert[0]) + "," + (wert[1]) + "," + (wert[2]) == "solaranzeige,Summen,Wh_GesamtHeute":
         print(wert[3])
@@ -91,6 +93,7 @@ def loop():
     ################################## Ende Block Auswertung ##################################
 
     ################################# Beginn Block Auswertung #################################
+    ######################### solaranzeige,aktuellesWetter,Temperatur #########################
 
     elif ((wert[0]) + "," + (wert[1]) + "," + (wert[2])) == "solaranzeige,aktuellesWetter,Temperatur":
         print(wert[3])
@@ -107,7 +110,9 @@ def loop():
 
     ################################## Ende Block Auswertung ##################################
 
-    ######################## Beginn Block Auswertung Temperatur Raspi #########################
+    ################################# Beginn Block Auswertung #################################
+    ############################# "solaranzeige,Service,RaspiTemp" ############################
+
     elif ((wert[0]) + "," + (wert[1]) + "," + (wert[2])) == "solaranzeige,Service,RaspiTemp":
         print(wert[3])
         url = ulanzi_url + "/api/custom?name=" + (wert[1]) + (wert[2])
@@ -139,6 +144,7 @@ def loop():
     ################################## Ende Block Auswertung ##################################
 
     ################################# Beginn Block Auswertung #################################
+    ############################## "solaranzeige,Batterie,Strom" ##############################
 
     elif (wert[0]) + "," + (wert[1]) + "," + (wert[2]) == "solaranzeige,Batterie,Strom":
         print(wert[3])
@@ -161,6 +167,7 @@ def loop():
     ################################## Ende Block Auswertung ##################################
 
     ################################# Beginn Block Auswertung #################################
+    ############################# "solaranzeige,Service,IntModus" #############################
 
     elif (wert[0]) + "," + (wert[1]) + "," + (wert[2]) == "solaranzeige,Service,IntModus":
         print(wert[3])
@@ -197,6 +204,7 @@ def loop():
     ################################## Ende Block Auswertung ##################################
 
     ################################# Beginn Block Auswertung #################################
+    ################################ "Pylontech,Batterie,SOC" #################################
 
     elif (wert[0]) + "," + (wert[1]) + "," + (wert[2]) == "Pylontech,Batterie,SOC":
         print(wert[3])
@@ -260,13 +268,13 @@ def loop():
 
     ################################## Ende Block Auswertung ##################################
 
+    # ab hier bitte nichts mehr ändern !!!
+
     else:
         logging.info('  Keine passende Abfrage oder Fehler in Abfrage!?')
         print("Nope, keine Auswertung verfügbar für " + str(wert[0]) + "," + str(wert[1]) + "," + (wert[2]))
 
-
 # Ende Funktion Loop
-
 
 ## Programm starten ##
 print(str(funktionen.url_verfuegbar(solaranzeige_url)) + " -> Solaranzeige URL verfügbar")
