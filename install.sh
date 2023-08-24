@@ -21,6 +21,7 @@ git clone https://github.com/Deepintheeast/Ulanzi-Solaranzeige-Connector
 if [  $# -eq 0 ]; then
     echo 'Instanz 0 erstellt!'
     mv Ulanzi-Solaranzeige-Connector /home/pi/scripts/Ulanzi-Solaranzeige-Connector
+    chmod 755 /home/pi/scripts/Ulanzi-Solaranzeige-Connector/ulanziconnect.py
     sudo cp /home/pi/scripts/Ulanzi-Solaranzeige-Connector/ulanzi-connector.service /etc/systemd/system/ulanzi-connector.service
     sudo chmod 644 /etc/systemd/system/ulanzi-connector.service
     sudo systemctl daemon-reload
@@ -31,6 +32,7 @@ else
      echo 'Instanz '$1' erstellt!'
      mv Ulanzi-Solaranzeige-Connector /home/pi/scripts/Ulanzi-Solaranzeige-Connector-$1
      cd /home/pi/scripts/Ulanzi-Solaranzeige-Connector-$1
+     chmod 755 /home/pi/scripts/Ulanzi-Solaranzeige-Connector-$1/ulanziconnect.py
      sed -i 's/Ulanzi-Solaranzeige-Connector/Ulanzi-Solaranzeige-Connector-'$1'/g' ulanzi-connector.service
      sed -i 's/Ulanzi-Solaranzeige-Connector\/ulanzi.log/Ulanzi-Solaranzeige-Connector-'$1'\/ulanzi-'$1'.log/g' settings.ini
      mv ulanzi-connector.service ulanzi-connector-$1.service
