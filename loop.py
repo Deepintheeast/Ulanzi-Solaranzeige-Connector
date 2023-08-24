@@ -162,7 +162,7 @@ def loop(datenbank, measurement, datenpunkt, solaranzeige_url, ulanzi_url, app_l
     ################################# Beginn Block Auswertung #################################
     ################################ "Pylontech,Batterie,SOC" #################################
 
-    elif (wert[0]) + "," + (wert[1]) + "," + (wert[2]) == "Pylontech,Batterie,SOC":
+    elif (wert[0]) + "," + (wert[1]) + "," + (wert[2]) == "solaranzeige,Batterie,SOC":
         print(wert[3])
 
         url = ulanzi_url + "/api/custom?name="+(wert[1])+(wert[2])
@@ -227,7 +227,6 @@ def loop(datenbank, measurement, datenpunkt, solaranzeige_url, ulanzi_url, app_l
     # ab hier bitte nichts mehr ändern !!!
 
     else:
-        logging.info('  Keine passende Abfrage oder Fehler in Abfrage!?')
         print("Nope, keine Auswertung verfügbar für " + str(wert[0]) + "," + str(wert[1]) + "," + (wert[2]))
 
 # Ende Loop
