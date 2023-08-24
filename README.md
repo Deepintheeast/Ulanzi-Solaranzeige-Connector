@@ -34,6 +34,27 @@ bearbeitet werden! Ihr findet in der "settings.ini" entsprechende erklärende Ko
 
 
 
+Zum testen des Programmes als erstes in den Programmordner wechseln!
+
+`cd /home/pi/scripts/Ulanzi-Solaranzeige-Connector`
+
+und von dort aus mit
+
+`python3 ./ulanziconnect.py` starten.
+
+Beenden mit Strg+C!
+
+
+Wenn alles passt dann erst als Dienst starten !
+
+`sudo systemctl start ulanzi-connector.service`
+
+
+
+
+
+
+
 
 # ---------------------------------------------------------------
 
