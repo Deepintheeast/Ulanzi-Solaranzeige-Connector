@@ -33,7 +33,6 @@ else
      cd /home/pi/scripts/Ulanzi-Solaranzeige-Connector-$1
      chmod 755 /home/pi/scripts/Ulanzi-Solaranzeige-Connector-$1/ulanziconnect.py
      sed -i 's/Ulanzi-Solaranzeige-Connector/Ulanzi-Solaranzeige-Connector-'$1'/g' ulanzi-connector.service
-     sed -i 's/Ulanzi-Solaranzeige-Connector\/ulanzi.log/Ulanzi-Solaranzeige-Connector-'$1'\/ulanzi-'$1'.log/g' settings.ini
      mv ulanzi-connector.service ulanzi-connector-$1.service
 
      sudo cp /home/pi/scripts/Ulanzi-Solaranzeige-Connector-$1/ulanzi-connector-$1.service /etc/systemd/system/ulanzi-connector-$1.service
