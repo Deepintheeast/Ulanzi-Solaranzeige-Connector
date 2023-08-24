@@ -51,6 +51,37 @@ Wenn alles passt dann erst als Dienst starten !
 
 
 
+## Installation 2. Instanz
+
+Hat jemand mehr als eine Ulanzi können zusätzliche Instanzen des Programmes, welche unabhängig voneinander laufen, installiert werden!
+
+Das geht einfach durch wiederholten Aufruf des Scriptes mit Angabe eines Parameters als Name/Nummer etc.
+
+Beispiel:
+
+normaler Aufruf des Scripts mit
+
+`bash ./install.sh`
+
+erzeugt eine Instanz unter 
+
+`/home/pi/scripts/Ulanzi-Solaranzeige-Connector`
+
+ein Aufruf mit Parameter "buero" 
+
+Aufruf des Scripts mit
+
+`bash ./install.sh buero`
+
+erzeugt eine Instanz unter 
+
+`/home/pi/scripts/Ulanzi-Solaranzeige-Connector-buero`
+
+Bitte keine Sonderzeichen, Umlaute, Leerzeichen im "Parameter" verwenden!
+
+Das kann für quasi beliebig viele Instanzen durchgeführt werden!
+
+Es werden auch der jeweilige Dienst unter selbem Schema eingerichtet!
 
 
 
