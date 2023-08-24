@@ -7,7 +7,6 @@ if [ ! -d '/home/pi/temp_ulanzi' ]; then
   #sudo apt update
   #sudo apt dist-upgrade -y
   sudo apt install pip
-  #pip3 install logging
   pip3 install bs4
   pip3 install lxml
   mkdir /home/pi/temp_ulanzi

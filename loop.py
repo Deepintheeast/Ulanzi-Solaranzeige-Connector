@@ -1,8 +1,10 @@
 # Definition Loop
+#
+# Ulanzi->Solaranzeige Connector V0.4
+
 import funktionen
 def loop(datenbank, measurement, datenpunkt, solaranzeige_url, ulanzi_url, app_life_time, app_show_time):
     wert = funktionen.db_abfrage(datenbank, measurement, datenpunkt, solaranzeige_url)
-    #logging.info({wert})
 
 # Ab hier können(müssen) Änderungen/Anpassungen an den jeweiligen "Auswertungen" gemacht werden!
 #
@@ -228,4 +230,4 @@ def loop(datenbank, measurement, datenpunkt, solaranzeige_url, ulanzi_url, app_l
         logging.info('  Keine passende Abfrage oder Fehler in Abfrage!?')
         print("Nope, keine Auswertung verfügbar für " + str(wert[0]) + "," + str(wert[1]) + "," + (wert[2]))
 
-# Ende Funktion Loop
+# Ende Loop

@@ -25,10 +25,8 @@ def db_abfrage(datenbank,measurement,datenpunkt,solaranzeige_url):
             "</fieldname>" \
             "</measurement>" \
             "</database></solaranzeige>"
-      #logging.debug(XML)
       headers = {'Content-Type': 'application/xml'} # set what your server accepts
       data = (requests.post(solaranzeige_url+"/api/control.php", data=XML, headers=headers).text)
-      #logging.debug(data)
       soup = bs.BeautifulSoup(data,"xml")
       for wert in soup.find_all('fieldname'):
         return datenbank,measurement,datenpunkt,wert.text
@@ -39,7 +37,6 @@ def ulanzi_senden(url,data):
     response = requests.post(url, json=data)
     #print('#### Status Code: ' + str(response.status_code) + ' ####')
     #requests.exceptions.ConnectionError
-    #logging.info(f'{url},{data}')
 
 # Ende Funktion
 # ----------------------------------

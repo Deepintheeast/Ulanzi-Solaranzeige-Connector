@@ -2,7 +2,6 @@
 #
 # Ulanzi->Solaranzeige Connector V0.4
 
-import logging
 import time
 import funktionen
 import loop
@@ -41,26 +40,14 @@ text_scrollspeed = config['ULANZI']['text_scrollspeed']
 night_show = config.getboolean('ULANZI','night_show')
 night_show_app = config['ULANZI']['night_show_app']
 version_nr = config['SCRIPT']['version_nr']
-log_datei = config['SCRIPT']['log_datei']
-log_level = config['SCRIPT']['log_level']
-
-# Logging definieren
-logging.basicConfig(filename=log_datei, filemode='w', level=logging.getLevelName(log_level),
-                    format='%(asctime)s - %(message)s',
-                    datefmt='%d-%b-%y %H:%M:%S')
-
-
-
 
 ## Programm starten ##
 print(str(funktionen.url_verfuegbar(solaranzeige_url)) + " -> Solaranzeige URL verfügbar")
 if not (funktionen.url_verfuegbar(solaranzeige_url)):
-    logging.info('Solaranzeige URL ist nicht erreichbar !!!')
     exit("Solaranzeige unter der eingegeben URL nicht erreichbar!")
 
 print(str(funktionen.url_verfuegbar(ulanzi_url)) + " -> Ulanzi URL verfügbar")
 if not (funktionen.url_verfuegbar(ulanzi_url)):
-    logging.info('Ulanzi URL ist nicht erreichbar !!!')
     exit("Ulanzi unter der eingegeben URL nicht erreichbar!")
 
 # Ulanzi anschalten
@@ -108,7 +95,6 @@ while True:
         if not x:
             funktionen.ulanzi_an_aus(ulanzi_url, 1)
             funktionen.ulanzi_auto_trans(ulanzi_url,1)
-            logging.info('-- Ulanzi *** an *** gesendet!')
             x = True
         zaehler = 0
         for element in werte:
@@ -119,14 +105,12 @@ while True:
             measurement = (D_M_D[1])
             datenpunkt = (D_M_D[2])
             loop.loop(datenbank, measurement, datenpunkt, solaranzeige_url,ulanzi_url,app_life_time,app_show_time)
-            logging.info(f'DB Abfrage mit ** {datenbank} , {measurement} , {datenpunkt} ** gestartet !')
             time.sleep(10)
             zaehler = zaehler + 1
     else:
         if x:
             if not night_show:
                 funktionen.ulanzi_an_aus(ulanzi_url,0)
-                logging.info('-- Ulanzi *** AUS *** gesendet!')
             funktionen.ulanzi_night_show_app_set(ulanzi_url,night_show_app)
             funktionen.ulanzi_auto_trans(ulanzi_url,0)
         x = False
