@@ -53,7 +53,7 @@ Wenn alles passt dann erst als Dienst starten !
 
 ## Installation 2. Instanz
 
-Hat jemand mehr als eine Ulanzi können zusätzliche Instanzen des Programmes, welche unabhängig voneinander laufen, installiert werden!
+Hat jemand mehr als eine Ulanzi, können zusätzliche Instanzen des Programmes, welche unabhängig voneinander laufen, installiert werden!
 
 Das geht einfach durch wiederholten Aufruf des Scriptes mit Angabe eines Parameters als Name/Nummer etc.
 
