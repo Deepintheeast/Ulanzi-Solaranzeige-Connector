@@ -1,3 +1,61 @@
+24.08.203 Update auf Version 0.40
+
+
+## Installation
+
+Um die Installation möglichst einfach zu gestalten habe ich diesmal ein 
+Installationsscript dazu erstellt!
+
+Zur Installation bitte als User "pi" auf einer Konsole anmelden!
+
+Als erstes müssen wir das Script runterladen:
+
+`wget https://raw.githubusercontent.com/Deepintheeast/Ulanzi-Solaranzeige-Connector/main/install.sh`
+
+jetzt einfach das Script aufrufen und durchlaufen lassen:
+
+`bash ./install.sh`
+
+Tja, eigentlich war es das schon! 
+
+Es sollten jetzt alle benötigten Programmdaten unter
+
+`/home/pi/scripts/Ulanzi-Solaranzeige-Connector`
+
+angelegt sein und auch der dazugehörige Dienst wurde schon mit erstellt (aber noch nicht gestartet)!
+
+## Konfiguration/Einstellungen
+
+Alle Einstellungen zum Programm wurden in eine eigene "settings.ini" Datei ausgelagert und sollten am besten mit
+
+`mcedit /home/pi/scripts/Ulanzi-Solaranzeige-Connector/settings.ini`
+
+bearbeitet werden! Ihr findet in der "settings.ini" entsprechende erklärende Kommentare zu den einzelnen Parametern!
+
+
+
+
+# ---------------------------------------------------------------
+
+# Achtung!
+
+# Alle weiteren Information und das Wiki werden in den kommenden Tagen für Version 0.40 überarbeitet und angepasst!
+
+# ---------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 09.08 2023 Update auf Version 0.32
 - Anpassung an awtrix-light 0.73
 - Integration "neuer Übergangseffekt -> 0-random"
