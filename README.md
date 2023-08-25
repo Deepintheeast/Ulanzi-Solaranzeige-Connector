@@ -139,7 +139,9 @@ auf einer
 ) !
 
 
-https://github.com/Deepintheeast/Ulanzi-Solaranzeige-Connector/assets/136626582/99481df8-7262-40a2-a407-776780bc073b
+
+https://github.com/Deepintheeast/Ulanzi-Solaranzeige-Connector/assets/136626582/ea3048cd-4d8e-4ff9-b2a9-cf07f746b7d4
+
 
 Im Video seht Ihr der Reihe nach folgende Infos:
 
