@@ -1,5 +1,7 @@
 24.08.203 Update auf Version 0.40
 
+https://github.com/Deepintheeast/Ulanzi-Solaranzeige-Connector/assets/136626582/ea3048cd-4d8e-4ff9-b2a9-cf07f746b7d4
+
 
 ## Installation
 
