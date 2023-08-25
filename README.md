@@ -1,6 +1,8 @@
 
 
-https://github.com/Deepintheeast/Ulanzi-Solaranzeige-Connector/assets/136626582/ea3048cd-4d8e-4ff9-b2a9-cf07f746b7d4
+
+https://github.com/Deepintheeast/Ulanzi-Solaranzeige-Connector/assets/136626582/01b3815b-6cdc-4f46-af8c-d7f69a1ce544
+
 
 
 24.08.203 Update auf Version 0.40
@@ -143,8 +145,6 @@ auf einer
 ) !
 
 
-
-https://github.com/Deepintheeast/Ulanzi-Solaranzeige-Connector/assets/136626582/ea3048cd-4d8e-4ff9-b2a9-cf07f746b7d4
 
 
 Im Video seht Ihr der Reihe nach folgende Infos:
