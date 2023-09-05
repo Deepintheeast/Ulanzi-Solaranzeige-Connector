@@ -170,6 +170,8 @@ def loop(datenbank, measurement, datenpunkt, solaranzeige_url, ulanzi_url, app_l
         if int(wert[3]) >= 1 and int(wert[3]) <= 10:
             data = {
                 "text": (wert[3]) + " %",
+                "progress": (wert[3]),
+                "progressc": [0, 255, 0],
                 "lifetime": int(app_life_time),
                 "icon": 12832,
                 "color": [154, 250, 10],
@@ -179,6 +181,8 @@ def loop(datenbank, measurement, datenpunkt, solaranzeige_url, ulanzi_url, app_l
         elif int(wert[3]) >= 11 and int(wert[3]) <= 30:
             data = {
                 "text": (wert[3]) + " %",
+                "progress": (wert[3]),
+                "progressc": [0, 255, 0],
                 "lifetime": int(app_life_time),
                 "icon": 6359,
                 "color": [154, 250, 10],
@@ -188,6 +192,8 @@ def loop(datenbank, measurement, datenpunkt, solaranzeige_url, ulanzi_url, app_l
         elif int(wert[3]) >= 31 and int(wert[3]) <= 50:
             data = {
                 "text": (wert[3]) + " %",
+                "progress": (wert[3]),
+                "progressc": [0, 255, 0],
                 "lifetime": int(app_life_time),
                 "icon": 6360,
                 "color": [154, 250, 10],
@@ -197,6 +203,8 @@ def loop(datenbank, measurement, datenpunkt, solaranzeige_url, ulanzi_url, app_l
         elif int(wert[3]) >= 51 and int(wert[3]) <= 70:
             data = {
                 "text": (wert[3]) + " %",
+                "progress": (wert[3]),
+                "progressc": [0, 255, 0],
                 "lifetime": int(app_life_time),
                 "icon": 6361,
                 "color": [154, 250, 10],
@@ -206,6 +214,8 @@ def loop(datenbank, measurement, datenpunkt, solaranzeige_url, ulanzi_url, app_l
         elif int(wert[3]) >= 71 and int(wert[3]) <= 90:
             data = {
                 "text": (wert[3]) + " %",
+                "progress": (wert[3]),
+                "progressc": [0, 255, 0],
                 "lifetime": int(app_life_time),
                 "icon": 6362,
                 "color": [154, 250, 10],
@@ -215,6 +225,8 @@ def loop(datenbank, measurement, datenpunkt, solaranzeige_url, ulanzi_url, app_l
         elif int(wert[3]) >= 91 and int(wert[3]) <= 100:
             data = {
                 "text": (wert[3]) + " %",
+                "progress": (wert[3]),
+                "progressc": [0, 255, 0],
                 "lifetime": int(app_life_time),
                 "icon": 6363,
                 "color": [154, 250, 10],
