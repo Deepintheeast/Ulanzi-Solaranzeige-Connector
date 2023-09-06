@@ -9,6 +9,7 @@ if [ ! -d '/home/pi/temp_ulanzi' ]; then
   sudo apt install pip
   pip3 install bs4
   pip3 install lxml
+  pip3 install requests
   mkdir /home/pi/temp_ulanzi
   mkdir /home/pi/scripts
 fi
