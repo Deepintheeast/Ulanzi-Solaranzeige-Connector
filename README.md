@@ -3,6 +3,9 @@
 
 https://github.com/Deepintheeast/Ulanzi-Solaranzeige-Connector/assets/136626582/01b3815b-6cdc-4f46-af8c-d7f69a1ce544
 
+08.09.2023 Update auf Version 0.41
+div. kleinere Anpassungen an AWTRIX light 0.85
+
 05.09.2023 Progressbar zur Auswertung  "solarnzeige,Batterie,SOC" hinzugefügt!
 
 24.08.203 Update auf Version 0.40
