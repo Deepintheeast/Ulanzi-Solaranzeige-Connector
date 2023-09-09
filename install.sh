@@ -6,6 +6,7 @@ if [ ! -d '/home/pi/temp_ulanzi' ]; then
   echo $#
   #sudo apt update
   #sudo apt dist-upgrade -y
+  sudo apt install git
   sudo apt install pip
   pip3 install bs4
   pip3 install lxml
