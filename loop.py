@@ -23,7 +23,8 @@ def loop(datenbank, measurement, datenpunkt, solaranzeige_url, ulanzi_url, app_l
             "lifetime": int(app_life_time),
             "icon": 27283, # darzustellendes Icon
             "rainbow": bool(1),
-            "duration": app_show_time
+            #"duration": app_show_time
+            "repeat": 2
         }
         funktionen.ulanzi_senden(url, data)
 
@@ -41,8 +42,10 @@ def loop(datenbank, measurement, datenpunkt, solaranzeige_url, ulanzi_url, app_l
             "text": str(round((float((wert[3])) / 1000), 2)) + " kWh",
             "lifetime": int(app_life_time),
             "icon": 51301,
+            "pushIcon": 2,
             "color": [252, 186, 3],
-            "duration": app_show_time
+            #"duration": app_show_time
+            "repeat": 2
         }
         funktionen.ulanzi_senden(url, data)
 
