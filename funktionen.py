@@ -4,6 +4,8 @@
 import requests
 import bs4 as bs
 import time
+from suntime import Sun
+from datetime import datetime, timedelta
 
 # Funktion URL auf Verfügbarkeit testen
 def url_verfuegbar(url):
@@ -27,13 +29,14 @@ def db_abfrage(datenbank,measurement,datenpunkt,solaranzeige_url):
             "</database></solaranzeige>"
       headers = {'Content-Type': 'application/xml'} # set what your server accepts
       data = (requests.post(solaranzeige_url+"/api/control.php", data=XML, headers=headers).text)
-      soup = bs.BeautifulSoup(data,"xml")
+      #soup = bs.BeautifulSoup(data,"xml")
+      soup = bs.BeautifulSoup(data,"html.parser")
       for wert in soup.find_all('fieldname'):
         return datenbank,measurement,datenpunkt,wert.text
 # Ende Funktion
 # ----------------------------------
 # Funktion Daten an Ulanzi senden
-def ulanzi_senden(url,data):
+def ulanzi_senden(url, data):
     response = requests.post(url, json=data)
     #print('#### Status Code: ' + str(response.status_code) + ' ####')
     #requests.exceptions.ConnectionError
@@ -51,6 +54,7 @@ def intro(ulanzi_url,version_nr):
     data = {
         "text": "Ulanzi->Solaranzeige Connector Version "+str(version_nr),
         "rainbow": bool(1),
+        "rtttl": "s:d=4,o=6,b=185:c,p,c,p,c",
         "repeat": 1
     }
     ulanzi_senden(url,data)
@@ -143,3 +147,39 @@ def ulanz_init(ulanzi_url,text_uppercase,text_scrollspeed):
         "SSPEED": text_scrollspeed
     }
     ulanzi_senden(url, data)
+# Ende Funktion
+# ----------------------------------
+# Funktion Abfrage Sonnenaufgang/untergang
+def get_sa_su(breite, laenge, sa_korrektur=0, su_korrektur=0):
+    # Erzeuge das Sun-Objekt
+    sun = Sun(breite, laenge)
+
+    # Bestimme das aktuelle Datum und die aktuelle Zeit
+    now = datetime.now()
+
+    # Prüfe, ob die Sommerzeit aktiv ist
+    is_dst = time.localtime().tm_isdst == 1
+
+    # Berechne die Zeiten für Sonnenaufgang und Sonnenuntergang
+    sun_auf = sun.get_local_sunrise_time(now)
+    sun_unter = sun.get_local_sunset_time(now)
+
+    # Falls Sommerzeit aktiv ist, ziehe eine Stunde von den Zeiten ab
+    if is_dst:
+        sun_auf -= timedelta(hours=1)
+        sun_unter -= timedelta(hours=1)
+
+    # Berücksichtige die Korrekturwerte für Sonnenaufgang und Sonnenuntergang
+    sun_auf_korr = sun_auf + timedelta(minutes=sa_korrektur)
+    sun_unter_korr = sun_unter + timedelta(minutes=su_korrektur)
+
+    # Konvertiere die Zeiten in String-Format
+    sun_auf_str = sun_auf.strftime("%H:%M")
+    sun_auf_korr_str = sun_auf_korr.strftime("%H:%M")
+    sun_unter_str = sun_unter.strftime("%H:%M")
+    sun_unter_korr_str = sun_unter_korr.strftime("%H:%M")
+
+    # Gib die Zeiten als Array von Strings zurück
+    return [sun_auf_str, sun_auf_korr_str, sun_unter_str, sun_unter_korr_str]
+# Ende Funktion
+# ----------------------------------
