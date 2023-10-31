@@ -124,9 +124,6 @@ x = True
 y = True
 z = True
 
-# Hintergrund-Thread für Anzeige Sonnen-Auf/Untergang
-
-
 # Loop starten
 while True:
     # Helligkeit setzen Start
