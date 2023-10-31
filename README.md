@@ -4,8 +4,6 @@
 https://github.com/Deepintheeast/Ulanzi-Solaranzeige-Connector/assets/136626582/01b3815b-6cdc-4f46-af8c-d7f69a1ce544
 
 31.10.2023 Update auf Version 0.42
-Update auf Version 0.42
-
 Start/Stop nach Astro Zeit (Sonnen-Auf/Untergang)
 div. kleine Fixe und Anpassungen
 
