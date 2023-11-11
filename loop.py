@@ -163,14 +163,14 @@ def loop(datenbank, measurement, datenpunkt, solaranzeige_url, ulanzi_url, app_l
     ################################## Ende Block Auswertung ##################################
 
     ################################# Beginn Block Auswertung #################################
-    ################################ "Pylontech,Batterie,SOC" #################################
+    ################################ "solaranzeige,Batterie,SOC" #################################
 
     elif (wert[0]) + "," + (wert[1]) + "," + (wert[2]) == "solaranzeige,Batterie,SOC":
         print(wert[3])
 
         url = ulanzi_url + "/api/custom?name="+(wert[1])+(wert[2])
 
-        if int(wert[3]) >= 1 and int(wert[3]) <= 10:
+        if int(wert[3]) >= 0 and int(wert[3]) <= 10:
             data = {
                 "text": (wert[3]) + " %",
                 "progress": (wert[3]),
