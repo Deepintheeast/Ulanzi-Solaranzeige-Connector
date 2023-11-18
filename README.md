@@ -19,7 +19,7 @@ div. kleinere Anpassungen an AWTRIX light 0.85
 Um die Installation möglichst einfach zu gestalten habe ich diesmal ein 
 Installationsscript dazu erstellt!
 
-Zur Installation bitte als User "pi" auf einer Konsole anmelden!
+Zur Installation bitte als User "pi" auf einer Konsole an Eurer "Solaranzeige-Installation" anmelden!
 
 Als erstes müssen wir das Script runterladen:
 
