@@ -1,6 +1,5 @@
 #!/bin/sh
 
-
 if [ ! -d '/home/pi/temp_ulanzi' ]; then
   echo $1
   echo $#
