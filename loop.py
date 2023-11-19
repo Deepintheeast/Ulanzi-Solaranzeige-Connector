@@ -44,9 +44,7 @@ def loop(
     ################################# Beginn Block Auswertung #################################
     ########################### solaranzeige,Summen,Wh_GesamtHeute ############################
 
-    elif (wert[0]) + "," + (wert[1]) + "," + (
-        wert[2]
-    ) == "solaranzeige,Summen,Wh_GesamtHeute":
+    elif (wert[0]) + "," + (wert[1]) + "," + (wert[2]) == "solaranzeige,Summen,Wh_GesamtHeute":
         print(" ** Wert aus DB: "+wert[3])
 
         url = ulanzi_url + "/api/custom?name=" + (wert[1]) + (wert[2])
@@ -69,9 +67,7 @@ def loop(
     ################################# Beginn Block Auswertung #################################
     ######################### solaranzeige,aktuellesWetter,Temperatur #########################
 
-    elif (
-        (wert[0]) + "," + (wert[1]) + "," + (wert[2])
-    ) == "solaranzeige,aktuellesWetter,Temperatur":
+    elif (wert[0]) + "," + (wert[1]) + "," + (wert[2]) == "solaranzeige,aktuellesWetter,Temperatur":
         print(" ** Wert aus DB: "+wert[3])
 
         url = ulanzi_url + "/api/custom?name=" + (wert[1]) + (wert[2])
@@ -92,11 +88,11 @@ def loop(
     ################################# Beginn Block Auswertung #################################
     ############################# "solaranzeige,Service,RaspiTemp" ############################
 
-    elif (
-        (wert[0]) + "," + (wert[1]) + "," + (wert[2])
-    ) == "solaranzeige,Service,RaspiTemp":
+    elif (wert[0]) + "," + (wert[1]) + "," + (wert[2]) == "solaranzeige,Service,RaspiTemp":
         print(" ** Wert aus DB: "+wert[3])
+            
         url = ulanzi_url + "/api/indicator2"
+            
         if wert[3] <= str(35):
             data = {"color": [0, 255, 0], "fade": 7000}
         elif wert[3] >= str(36) and wert[3] <= str(50):
@@ -140,9 +136,7 @@ def loop(
     ################################# Beginn Block Auswertung #################################
     ############################# "solaranzeige,Service,IntModus" #############################
 
-    elif (wert[0]) + "," + (wert[1]) + "," + (
-        wert[2]
-    ) == "solaranzeige,Service,IntModus":
+    elif (wert[0]) + "," + (wert[1]) + "," + (wert[2]) == "solaranzeige,Service,IntModus":
         print(" ** Wert aus DB: "+wert[3])
 
         url = ulanzi_url + "/api/indicator3"
