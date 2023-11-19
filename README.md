@@ -15,7 +15,7 @@ app_scroll_duration = 2
 # Anzahl der Wiederholungen "scrollender" Apps im Loop
 ```
 
-jeweils für "statische" und "scrollende" Apps seperat festlegen!
+jeweils für "statische" und "scrollende" Apps separat festlegen!
 Vorteil -> scrollende Apps laufen sauber bis zum Ende durch und werden nicht mehr mittendrin beendet!
 
 Code bereinigt, vorbeugende "Fehlerbehandlungen" hinzugefügt. Diverse Anpassungen und Fixe!
