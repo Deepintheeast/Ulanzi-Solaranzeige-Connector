@@ -3,6 +3,24 @@
 
 https://github.com/Deepintheeast/Ulanzi-Solaranzeige-Connector/assets/136626582/01b3815b-6cdc-4f46-af8c-d7f69a1ce544
 
+19.11.2023 Update auf Version 0.43
+
+die Anzeigedauer der einzelnen Apps lässt sich jetzt in der "settings.ini" durch die Parameter
+
+```
+app_show_time = 3
+# Länge der Anzeige "statischer" Apps im Loop in Sekunden
+
+app_scroll_duration = 2
+# Anzahl der Wiederholungen "scrollender" Apps im Loop
+```
+
+jeweils für "statische" und "scrollende" Apps seperat festlegen!
+Vorteil -> scrollende Apps laufen sauber bis zum Ende durch und werden nicht mehr mittendrin beendet!
+
+Code bereinigt, vorbeugende "Fehlerbehandlungen" hinzugefügt. Diverse Anpassungen und Fixe!
+
+
 31.10.2023 Update auf Version 0.42
 Start/Stop nach Astro Zeit (Sonnen-Auf/Untergang)
 div. kleine Fixe und Anpassungen
