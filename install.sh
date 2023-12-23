@@ -3,7 +3,6 @@
 # Abfrage der Debian-Version
 version=$(lsb_release -rs)
 
-sudo apt install pip
 sudo apt install git
 
 if [ ! -d '/home/pi/temp_ulanzi' ]; then
@@ -13,21 +12,24 @@ if [ ! -d '/home/pi/temp_ulanzi' ]; then
   #sudo apt dist-upgrade -y
 
   if [ "$version" = "11" ]; then
-    echo "Debian 11 erkannt. Führe Aktionen für Debian 11 aus..."
+    echo "Debian 11 erkannt. Führe Installationen für Debian 11 aus..."
+    sudo apt install pip3
     pip3 install bs4
     pip3 install suntime
+    pip3 install lxml
 
   elif [ "$version" = "12" ]; then
-    echo "Debian 12 erkannt. Führe Aktionen für Debian 12 aus..."
+    echo "Debian 12 erkannt. Führe Installationen für Debian 12 aus..."
+    sudo apt install python3-pip
     sudo apt install python3-bs4
     sudo apt install python3-suntime
+    sudo apt install python3-lxml
     
   else
     echo "Unbekannte Debian-Version. Beende Skript."
     exit 1
   fi
 
-  pip3 install lxml
   mkdir /home/pi/temp_ulanzi
   mkdir /home/pi/scripts
 fi
