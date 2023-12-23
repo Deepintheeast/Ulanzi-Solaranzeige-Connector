@@ -3,6 +3,10 @@
 
 https://github.com/Deepintheeast/Ulanzi-Solaranzeige-Connector/assets/136626582/01b3815b-6cdc-4f46-af8c-d7f69a1ce544
 
+23.12.2023 Anpassungen Installscript
+
+Das Script erkennt ob es auf Debian 11 (Solaranzeige Ver. 5.x) oder Debian 12 (Solaranzeige Ver. 6.x) aufgerufen wurde und installiert entsprechend die benötigten Pakete.
+
 19.11.2023 Update auf Version 0.43
 
 die Anzeigedauer der einzelnen Apps lässt sich jetzt in der "settings.ini" durch die Parameter
