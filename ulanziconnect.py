@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Ulanzi->Solaranzeige Connector V0.43"""
+"""Ulanzi->Solaranzeige Connector V0.44"""
 
 import time
 import threading
