@@ -1,4 +1,5 @@
 #!/bin/sh
+# Installationsscript für 'Ulanzi-Solaranzeige-Connector' ab Version 0.44
 
 # Abfrage der Debian-Version
 version=$(lsb_release -rs)
