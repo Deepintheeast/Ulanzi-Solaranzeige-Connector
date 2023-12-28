@@ -13,7 +13,7 @@ def url_verfuegbar(url):
     try:
         r = requests.get(url, timeout=10)
         print(f"Statuscode: {r.status_code}")
-       # print(f"Header: {r.headers}")
+       ## print(f"Header: {r.headers}")
        # print(f"Inhalt: {r.text}")
         return r.status_code == 200 or r.status_code == 403
     except requests.exceptions.ConnectionError as e:
