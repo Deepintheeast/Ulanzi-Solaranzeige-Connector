@@ -12,7 +12,7 @@ def url_verfuegbar(url):
     """Funktion URL auf Verfügbarkeit testen"""
     try:
         r = requests.get(url, timeout=10)
-        return r.status_code == 200
+        return r.status_code == 200 or r.status_code == 403
     except requests.exceptions.ConnectionError:
         return False
 # Ende Funktion
