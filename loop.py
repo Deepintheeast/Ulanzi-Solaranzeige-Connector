@@ -1,4 +1,4 @@
-"""Definition Loop. Ulanzi->Solaranzeige Connector V0.43"""
+"""Definition Loop. Ulanzi->Solaranzeige Connector V0.44"""
 
 import funktionen
 
