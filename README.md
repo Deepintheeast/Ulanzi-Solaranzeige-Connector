@@ -3,6 +3,10 @@
 
 https://github.com/Deepintheeast/Ulanzi-Solaranzeige-Connector/assets/136626582/01b3815b-6cdc-4f46-af8c-d7f69a1ce544
 
+28.12.2023 Update auf Version 0.44
+
+Update zur Anpassung an Solaranzeige V6.x . Alle User der 0.43 Version müssen nur die "funktionen.py" ersetzen. Alle Einstellungen/Änderungen bleiben erhalten!  
+
 23.12.2023 Anpassungen Installscript
 
 Das Script erkennt ob es auf Debian 11 (Solaranzeige Ver. 5.x) oder Debian 12 (Solaranzeige Ver. 6.x) aufgerufen wurde und installiert entsprechend die benötigten Pakete.
