@@ -1,4 +1,4 @@
-"""Funktionen für "Ulanzi-Solaranzeige-Connector" ab Version 0.43"""
+"""Funktionen für "Ulanzi-Solaranzeige-Connector" ab Version 0.44"""
 #
 # bitte ab hier nichts verändern !!!
 #
