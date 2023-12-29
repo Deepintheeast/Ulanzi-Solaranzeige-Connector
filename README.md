@@ -5,7 +5,7 @@ https://github.com/Deepintheeast/Ulanzi-Solaranzeige-Connector/assets/136626582/
 
 28.12.2023 Update auf Version 0.44
 
-Update zur Anpassung an Solaranzeige V6.x . Alle User der 0.43 Version müssen nur die "funktionen.py" ersetzen. Alle Einstellungen/Änderungen bleiben erhalten!  
+Update zur Anpassung an Solaranzeige Ver. 6.x . Alle User der 0.43 Version müssen nur die "funktionen.py" ersetzen. Alle Einstellungen/Änderungen bleiben erhalten!  
 
 23.12.2023 Anpassungen Installscript
 
