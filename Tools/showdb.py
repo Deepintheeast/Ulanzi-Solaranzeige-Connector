@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 """
 Dieses Skript stellt eine Verbindung zu einer InfluxDB-Datenbank her, 
 ruft alle Measurements ab und gibt den letzten Wert für jedes Measurement aus.
