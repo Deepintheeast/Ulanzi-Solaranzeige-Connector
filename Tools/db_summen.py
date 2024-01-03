@@ -65,7 +65,7 @@ time.sleep(25)
 time_stamp_db = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
 
 # Klasse initialisieren
-handler = InfluxDBHandler("127.0.0.1", 8086, "", "", "WR1")
+handler = InfluxDBHandler("127.0.0.1", 8086, "", "", "solaranzeige")
 
 
 # Wertepaar 1 holen, berechnen und nach WRSummen schreiben
