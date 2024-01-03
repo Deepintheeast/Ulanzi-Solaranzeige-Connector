@@ -68,7 +68,7 @@ time_stamp_db = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
 handler = InfluxDBHandler("127.0.0.1", 8086, "", "", "solaranzeige")
 
 
-# Wertepaar 1 holen, berechnen und nach WRSummen schreiben
+# Wertepaar 1 holen, berechnen und nach Summen schreiben
 result = handler.read_data("solaranzeige", "PV", "PV1_Leistung")
 result_1 = round(float(result), 2)
 print(result_1)
@@ -79,7 +79,7 @@ wert = result_1 + result_2
 handler.write_data("Summen", "PV", "PV1_Leistung", wert, time_stamp_db)
 print(wert)
 
-# Wertepaar 2 holen, berechnen und nach WRSummen schreiben
+# Wertepaar 2 holen, berechnen und nach Summen schreiben
 result = handler.read_data("solaranzeige", "PV", "PV2_Leistung")
 result_1 = round(float(result), 2)
 print(result_1)
@@ -90,7 +90,7 @@ wert = result_1 + result_2
 handler.write_data("Summen", "PV", "PV2_Leistung", wert, time_stamp_db)
 print(wert)
 
-# Wertepaar 3 holen, berechnen und nach WRSummen schreiben
+# Wertepaar 3 holen, berechnen und nach Summen schreiben
 #result = handler.read_data("WR1", "AC", "Leistung")
 #result_1 = round(float(result), 2)
 #print(result_1)
