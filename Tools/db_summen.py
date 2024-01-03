@@ -69,25 +69,25 @@ handler = InfluxDBHandler("127.0.0.1", 8086, "", "", "solaranzeige")
 
 
 # Wertepaar 1 holen, berechnen und nach WRSummen schreiben
-result = handler.read_data("WR1", "PV", "Leistung")
+result = handler.read_data("solaranzeige", "PV", "PV1_Leistung")
 result_1 = round(float(result), 2)
 print(result_1)
-result = handler.read_data("WR2", "PV", "Leistung")
+result = handler.read_data("solaranzeige2", "PV", "PV1_Leistung")
 result_2 = round(float(result), 2)
 print(result_2)
 wert = result_1 + result_2
-handler.write_data("WRSummen", "PV", "Leistung", wert, time_stamp_db)
+handler.write_data("Summen", "PV", "PV1_Leistung", wert, time_stamp_db)
 print(wert)
 
 # Wertepaar 2 holen, berechnen und nach WRSummen schreiben
-result = handler.read_data("WR1", "Summen", "Wh_GesamtHeute")
+result = handler.read_data("solaranzeige", "PV", "PV2_Leistung")
 result_1 = round(float(result), 2)
 print(result_1)
-result = handler.read_data("WR2", "Summen", "Wh_GesamtHeute")
+result = handler.read_data("solaranzeige2", "PV", "PV2_Leistung")
 result_2 = round(float(result), 2)
 print(result_2)
 wert = result_1 + result_2
-handler.write_data("WRSummen", "Summen", "Wh_GesamtHeute", wert, time_stamp_db)
+handler.write_data("Summen", "PV", "PV2_Leistung", wert, time_stamp_db)
 print(wert)
 
 # Wertepaar 3 holen, berechnen und nach WRSummen schreiben
