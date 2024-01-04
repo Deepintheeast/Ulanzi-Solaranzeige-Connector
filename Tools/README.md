@@ -18,10 +18,9 @@ Die Installation des Tool's ist einfach:
 3. Script herunterladen
 
 
-```
-cd /home/pi/scripts/Tools/
-wget https://raw.githubusercontent.com/Deepintheeast/Ulanzi-Solaranzeige-Connector/main/Tools/db_summen.py
-```
+`cd /home/pi/scripts/Tools/`
+
+`wget https://raw.githubusercontent.com/Deepintheeast/Ulanzi-Solaranzeige-Connector/main/Tools/db_summen.py`
 
 
 4. Abhängigkeiten installieren
