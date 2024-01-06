@@ -12,7 +12,7 @@ Haupteinsatz im Zusammenspiel mit "Solaranzeige" ist das Bilden von Summen der W
 
 Die **Installation** des Tool's ist einfach:
 
-1. falls nicht vorhanden Drdner für Scripte im Homeverzeichnis anlegen:
+1. falls nicht vorhanden Ordner für Scripte im Homeverzeichnis anlegen:
 
 `mkdir /home/pi/scripts`
 
