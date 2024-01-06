@@ -2,7 +2,7 @@
 
 """
 Dieses Skript stellt eine Verbindung zu einer InfluxDB-Datenbank her, 
-ruft alle Measurements ab und gibt den letzten Wert für jedes Measurement aus.
+ruft alle Measurements ab und gibt jeden letzten Wert für jedes Measurement aus.
 Benötigt "InfluxDBClient" aus dem Paket "influxdb".
 Installation mit "pip3 install influxdb"
 
@@ -13,7 +13,7 @@ from influxdb import InfluxDBClient
 def show_measurements_and_last_values(database_name):
     """
     Stellt eine Verbindung zu einer InfluxDB-Datenbank her, 
-    ruft alle Measurements ab und gibt den letzten Wert für jedes Measurement aus.
+    ruft alle Measurements ab und gibt jeden letzten Wert für jedes Measurement aus.
     """
     # Verbindung zum InfluxDB-Server herstellen
     client = InfluxDBClient(host='127.0.0.1', port=8086)
