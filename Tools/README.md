@@ -74,7 +74,7 @@ handler.write_data("Summen", "PV", "PV1_Leistung", wert, time_stamp_db)
 print(wert)
 ```
 Hier wird nun in der 2. Zeile der Wert aus Datenbank "solaranzeige" , Measurement "PV", Wert "PV1_Leistng" geholt als "result_1" noch in eine Gleitkommazahl mit 2 Stellen gewandelt, gespeichert und per "print" auf der Konsole zur Kontrolle angezeigt! In den nächsten 3 Zeilen passiert das selbe mit dem Wert aus Datenbank "solaranzeige2).
-Sollen mehr als 2 Werte behandelt werden kann das ganze hier für weitere Werte adäquat erweitern! Das auskommentierte Beispiel "Werte 3 holen" am Ende des Scriptes zeigt das für 3. Datenbanken.
+Sollen mehr als 2 Werte behandelt werden kann das ganze hier für weitere Werte adäquat erweitert werden! Das auskommentierte Beispiel "Werte 3 holen" am Ende des Scriptes zeigt das für 3. Datenbanken.
 In den letzten 3 Zeilen werden hier im Beispiel die Werte "addiert", in die Datenbank "Summen", Measurement "PV", Wert "PV1_Leistung" geschrieben und zur Kontrolle auf der Konsole ausgegeben.
 
 Es können beliebig viele solche Blöcke erstellt und verarbeitet werden!
