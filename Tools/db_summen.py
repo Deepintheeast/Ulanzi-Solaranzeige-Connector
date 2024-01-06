@@ -90,7 +90,7 @@ wert = result_1 + result_2
 handler.write_data("Summen", "PV", "PV2_Leistung", wert, time_stamp_db)
 print(wert)
 
-## Wertepaar 3 holen, berechnen und nach Summen schreiben
+## Werte 3 holen, berechnen und nach Summen schreiben
 #result = handler.read_data("WR1", "PV", "Leistung")
 #result_1 = round(float(result), 2)
 #print(result_1)
