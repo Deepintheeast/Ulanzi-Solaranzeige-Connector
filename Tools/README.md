@@ -1,4 +1,4 @@
-Hier entsteht eine Sammlung "kleiner Tools" im Zusammenhang influxDB, Ulanzi etc.
+## Hier entsteht eine Sammlung "kleiner Tools" im Zusammenhang influxDB, Ulanzi etc.
 
 
 
@@ -45,7 +45,7 @@ für Debian 12 Solaranzeige Ver. 6.x
 
 Es müssen folgende Einstellungen im Script vorgenommen werden:
 
-Da wir das Script ja Über Cron (zeitgleich zum Auslesen der Regler/WR) jede Minute laufen lassen wollen müssen wir eine Verzögerung einbauen die die Ausführung unseres Scriptes solange pausiert bis die Werte der Regler(WR) ausgelesen und gespeichert sind. Das wird hier 
+Da wir das Script ja über Cron (zeitgleich zum Auslesen der Regler/WR) jede Minute laufen lassen wollen müssen wir eine Verzögerung einbauen die die Ausführung unseres Scriptes solange pausiert bis die Werte der Regler(WR) ausgelesen und gespeichert sind. Das wird hier 
 
 ```
 # Verzögerung in Sekunden bis alle "Regler" ausgelesen sind
@@ -74,8 +74,8 @@ handler.write_data("Summen", "PV", "PV1_Leistung", wert, time_stamp_db)
 print(wert)
 ```
 Hier wird nun in der 2. Zeile der Wert aus Datenbank "solaranzeige" , Measurement "PV", Wert "PV1_Leistng" geholt als "result_1" noch in eine Gleitkommazahl mit 2 Stellen gewandelt, gespeichert und per "print" auf der Konsole zur Kontrolle angezeigt! In den nächsten 3 Zeilen passiert das selbe mit dem Wert aus Datenbank "solaranzeige2).
-Sollen mehr als 2 Werte behandelt werden kann das ganze hier für weitere Werte adäquat erweitern!
-In den letzten 3 Zeilen werden heir im Beispiel die Werte "addiert", ind die Datenbank "Summen", Measurement "PV", Wert "PV1_Leistung" geschrieben und zur Kontrolle auf der Konsole ausgegeben.
+Sollen mehr als 2 Werte behandelt werden kann das ganze hier für weitere Werte adäquat erweitern! Das auskommentierte Beispiel "Werte 3 holen" am Ende des Scriptes zeigt das für 3. Datenbanken.
+In den letzten 3 Zeilen werden hier im Beispiel die Werte "addiert", in die Datenbank "Summen", Measurement "PV", Wert "PV1_Leistung" geschrieben und zur Kontrolle auf der Konsole ausgegeben.
 
 Es können beliebig viele solche Blöcke erstellt und verarbeitet werden!
 
@@ -87,9 +87,9 @@ Dazu wechselt man in das "Tools" Verzeichnis
 
 `python3 ./db_summen.py`
 
-(kleiner Tipp, zum testen eventuell unsere Verzögerung durch voransetzen einer #time.sleep(25) auskommentieren ;-))
+(kleiner Tipp, zum testen eventuell die "Verzögerung" durch voransetzen einer #time.sleep(25) auskommentieren ;-))
 
-Wenn man mit der Funkrion des Scriptes dann zufrieden ist das ganze dann durch Erstellen eines "Cron Eintrages" automatisieren. Dazu
+Wenn man mit der Funktion des Scriptes dann zufrieden ist, das ganze dann durch Erstellen eines "Cron Eintrages" automatisieren. Dazu
 
 `crontab -e`
 
