@@ -59,7 +59,46 @@ Den genauen Wert bekommt man durch einen Blick ins Log mit
 
 Hier kann man sehr gut erkennen nach wieviel Sekunden das Auslesen der Regler beendet ist, diesen Wert noch 3-5 Sekunden dazugeben und den Wert an Stelle der "25" eintragen.
 
-Jetzt müssen wir nur noch festlegen welche Daten aus welcher Datenbank geholt, wie diese "mathematisch" verknüpft und wohin das "Ergebnis" geschrieben werden soll!
+Jetzt müssen wir nur noch festlegen welche Daten aus welcher Datenbank geholt, wie diese "mathematisch" verknüpft und wohin das "Ergebnis" geschrieben werden soll! Das passiert im Script ab Zeile 71.
+
+```
+# Wertepaar 1 holen, berechnen und nach Summen schreiben
+result = handler.read_data("solaranzeige", "PV", "PV1_Leistung")
+result_1 = round(float(result), 2)
+print(result_1)
+result = handler.read_data("solaranzeige2", "PV", "PV1_Leistung")
+result_2 = round(float(result), 2)
+print(result_2)
+wert = result_1 + result_2
+handler.write_data("Summen", "PV", "PV1_Leistung", wert, time_stamp_db)
+print(wert)
+```
+Hier wird nun in der 2. Zeile der Wert aus Datenbank "solaranzeige" , Measurement "PV", Wert "PV1_Leistng" geholt als "result_1" noch in eine Gleitkommazahl mit 2 Stellen gewandelt, gespeichert und per "print" auf der Konsole zur Kontrolle angezeigt! In den nächsten 3 Zeilen passiert das selbe mit dem Wert aus Datenbank "solaranzeige2).
+Sollen mehr als 2 Werte behandelt werden kann das ganze hier für weitere Werte adäquat erweitern!
+In den letzten 3 Zeilen werden heir im Beispiel die Werte "addiert", ind die Datenbank "Summen", Measurement "PV", Wert "PV1_Leistung" geschrieben und zur Kontrolle auf der Konsole ausgegeben.
+
+Es können beliebig viele solche Blöcke erstellt und verarbeitet werden!
+
+
+Bevor man das ganze als Cron Eintrag automatisiert sollte es erst einmal ausgiebig auf der Konsole getestet werden!
+Dazu wechselt man in das "Tools" Verzeichnis
+
+`cd  /home/pi/scripts/Tools` und kann dann das Script wie folgt starten:
+
+`python3 ./db_summen.py`
+
+(kleiner Tipp, zum testen eventuell unsere Verzögerung durch voransetzen einer #time.sleep(25) auskommentieren ;-))
+
+Wenn man mit der Funkrion des Scriptes dann zufrieden ist das ganze dann durch Erstellen eines "Cron Eintrages" automatisieren. Dazu
+
+`crontab -e`
+
+aufrufen und um diese Zeile ergänzen
+
+`* * * * *    python3 /home/pi/scripts/db_summen.py	>/dev/null 2>&1`
+
+Ab jetzt wird das Script zu jeder vollen Minute gestartet und macht hoffentlich den gewünschten Job!
+
 
 
 
