@@ -56,6 +56,7 @@ vorgenommen. (hier 25 Sekunden)
 Den genauen Wert bekommt man durch einen Blick ins Log mit
 
 `tail -f /var/www/log/solaranzeige.log`
+
 Hier kann man sehr gut erkennen nach wieviel Sekunden das Auslesen der Regler beendet ist, diesen Wert noch 3-5 Sekunden dazugeben und den Wert an Stelle der "25" eintragen.
 
 Jetzt müssen wir nur noch festlegen welche Daten aus welcher Datenbank geholt, wie diese "mathematisch" verknüpft und wohin das "Ergebnis" geschrieben werden soll!
