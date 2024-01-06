@@ -90,15 +90,18 @@ wert = result_1 + result_2
 handler.write_data("Summen", "PV", "PV2_Leistung", wert, time_stamp_db)
 print(wert)
 
-# Wertepaar 3 holen, berechnen und nach Summen schreiben
-#result = handler.read_data("WR1", "AC", "Leistung")
+## Wertepaar 3 holen, berechnen und nach Summen schreiben
+#result = handler.read_data("WR1", "PV", "Leistung")
 #result_1 = round(float(result), 2)
 #print(result_1)
-#result = handler.read_data("WR2", "AC", "Leistung")
+#result = handler.read_data("WR2", "PV", "Leistung")
 #result_2 = round(float(result), 2)
 #print(result_2)
-#wert = result_1 + result_2
-#handler.write_data("WRSummen", "AC", "Leistung", wert, time_stamp_db)
+#result = handler.read_data("WR3", "PV", "Leistung")
+#result_3 = round(float(result), 2)
+#print(result_3)
+#wert = result_1 + result_2 + result_3
+#handler.write_data("WRSummen", "PV", "Leistung", wert, time_stamp_db)
 #print(wert)
 
 print("Thats all, have Fun!")
