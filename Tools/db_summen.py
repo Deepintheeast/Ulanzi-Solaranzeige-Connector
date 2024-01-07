@@ -109,5 +109,5 @@ print("Thats all, have Fun!")
 # Croneintrag zum starten des Skriptes:
 # crontab -e
 
-#   * * * * *    python3 /home/pi/scripts/db_summen.py	>/dev/null 2>&1
+#   * * * * *    python3 /home/pi/scripts/Tools/db_summen.py	>/dev/null 2>&1
 
