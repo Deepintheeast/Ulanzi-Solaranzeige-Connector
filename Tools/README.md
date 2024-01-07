@@ -95,7 +95,7 @@ Wenn man mit der Funktion des Scriptes dann zufrieden ist, das ganze dann durch 
 
 aufrufen und um diese Zeile ergänzen
 
-`* * * * *    python3 /home/pi/scripts/db_summen.py	>/dev/null 2>&1`
+`* * * * *    python3 /home/pi/scripts/Tools/db_summen.py	>/dev/null 2>&1`
 
 Ab jetzt wird das Script zu jeder vollen Minute gestartet und macht hoffentlich den gewünschten Job!
 
