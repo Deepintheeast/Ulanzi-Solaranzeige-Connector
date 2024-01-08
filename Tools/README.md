@@ -61,7 +61,7 @@ Hier kann man sehr gut erkennen nach wieviel Sekunden das Auslesen der Regler be
 
 Jetzt müssen wir nur noch festlegen welche Daten aus welcher Datenbank geholt, wie diese "mathematisch" verknüpft und wohin das "Ergebnis" geschrieben werden soll! Das passiert im Script ab Zeile 71.
 
-```
+```bash
 # Wertepaar 1 holen, berechnen und nach Summen schreiben
 result = handler.read_data("solaranzeige", "PV", "PV1_Leistung")
 result_1 = round(float(result), 2)
@@ -101,4 +101,34 @@ Ab jetzt wird das Script zu jeder vollen Minute gestartet und macht hoffentlich 
 
 
 
+
+
+## 2. - showdb.py -
+
+Da sich immer wieder die Frage stellt welche Daten alle in der InfluxDB stecken und man zB. beim Einrichten des Ulanzi-Connectors auch die Angaben des "Measurements" und der entsprechenden "Werte" benötigt habe ich dazu mal ein kleines Tool in Python erstellt!
+
+Das Script wird einfach mit Angabe des Datenbanknamens aufgerufen!
+
+Die Installation des Tool's ist einfach:
+
+```bash
+# falls nicht vorhanden Ordner für Scripte im Homeverzeichnis anlegen:
+mkdir /home/pi/scripts
+
+# Ordner Tools anlegen falls nicht vorhanden
+mkdir /home/pi/scripts/Tools
+
+# in Ordner wechseln und Script herunterladen
+cd /home/pi/scripts/Tools/
+wget https://raw.githubusercontent.com/Deepintheeast/Ulanzi-Solaranzeige-Connector/main/Tools/showdb.py
+
+# benötigte Abhängigkeiten installieren
+# für Debian 11 Solaranzeige Ver. 5.x
+sudo pip3 install influxdb
+# für Debian 12 Solaranzeige Ver. 6.x
+sudo apt install python3-influxdb
+
+# Aufruf des Scriptes mit Angbe der auszulesenden Datenbank hier "solaranzeige"
+python3 /home/pi/scripts/Tools/showdb.py solaranzeige
+```
 
