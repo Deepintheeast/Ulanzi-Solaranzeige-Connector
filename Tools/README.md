@@ -128,7 +128,7 @@ sudo pip3 install influxdb
 # für Debian 12 Solaranzeige Ver. 6.x
 sudo apt install python3-influxdb
 
-# Aufruf des Scriptes mit Angbe der auszulesenden Datenbank hier "solaranzeige"
+# Aufruf des Scriptes mit Angabe der auszulesenden Datenbank hier "solaranzeige"
 python3 /home/pi/scripts/Tools/showdb.py solaranzeige
 ```
 
