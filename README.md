@@ -1,3 +1,26 @@
+# Achtung! Projekt wird nicht mehr weiterentwickelt! Aber ...! Voraussichtlich zu Ostern erscheint das "NachfolgeProjekt" was noch viel mehr kann!
+
+Einige Highlight's schon mal im Vorraus:
+
+Daten werden(können) direkt aus der Datenbank geholt werden
+Aktuell unterstützt werden:
+- influxdb
+- sqlite
+- mariadb
+- postgresql
+
+Daten können wie gewohnt "einzeln" geholt und verarbeitet werden. 
+Aber auch das holen und verarbeiten von mehreren Daten als "Gruppe" ist möglich.
+Damit sind Ausgaben von "kombinierten" Daten wie im folgenden Video möglich! Innerhalb dieser Gruppen sind auch "mathematische Berechnungen" zB. Summen aus einzelnen Werten bilden etc. möglich. Es besteht damit auch die Möglichkeit Infos und Daten der "Automatisierung" anzuzeigen.
+
+https://github.com/Deepintheeast/Ulanzi-Solaranzeige-Connector/assets/136626582/34c95d2c-20b5-4736-a157-5ad23ea43201
+
+
+Es gibt wieder die Möglichkeit Astroden anzuzeigen und zur Steuerung zu nutzen, Mondphasen können angezeigt werden, etc.
+Lasst Euch überraschen!
+
+Sobald das Projekt online geht findet Ihr hier die entsprechenden Links!
+
 
 
 
