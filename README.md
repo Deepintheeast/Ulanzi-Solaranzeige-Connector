@@ -2,16 +2,18 @@
 
 Einige Highlight's schon mal im Vorraus:
 
-Daten werden(können) direkt aus der Datenbank geholt werden
+Daten werden nun direkt aus der Datenbank geholt.
 Aktuell unterstützt werden:
 - influxdb
 - sqlite
 - mariadb
 - postgresql
 
-Daten können wie gewohnt "einzeln" geholt und verarbeitet werden. 
+Die Daten können wie gewohnt "einzeln" geholt und verarbeitet werden. 
 Aber auch das holen und verarbeiten von mehreren Daten als "Gruppe" ist möglich.
-Damit sind Ausgaben von "kombinierten" Daten wie im folgenden Video möglich! Innerhalb dieser Gruppen sind auch "mathematische Berechnungen" zB. Summen aus einzelnen Werten bilden etc. möglich. Es besteht damit auch die Möglichkeit Infos und Daten der "Automatisierung" anzuzeigen.
+Damit sind Ausgaben von "kombinierten" Daten wie im folgenden Video möglich! 
+Innerhalb dieser Gruppen sind auch "mathematische Berechnungen" zB. Summen aus einzelnen Werten bilden etc. möglich. 
+Es besteht damit auch die Möglichkeit Infos und Daten der "Automatisierung" anzuzeigen.
 
 
 https://github.com/Deepintheeast/Ulanzi-Solaranzeige-Connector/assets/136626582/e98a82a7-dbf1-4f82-815e-c514b2acc5c1
