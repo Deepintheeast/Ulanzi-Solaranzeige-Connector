@@ -1,15 +1,11 @@
+# ----------------------------------------------------
+ # Achtung! Projekt wird nicht mehr weiterentwickelt!
+# ----------------------------------------------------
+
  
  Hier geht es zum Nachfolge Programm!
  
  ## https://github.com/Deepintheeast/AWTRIX3-Connector 
-
-
-
-
-
-
-
-# Achtung! Projekt wird nicht mehr weiterentwickelt! Aber ...! Voraussichtlich zu Ostern erscheint das "NachfolgeProjekt" was noch viel mehr kann!
 
 Einige Highlight's schon mal im Vorraus:
 
